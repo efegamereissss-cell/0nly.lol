@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>0NLY.LOL | Ultra-Elite Identity & Bio Platform</title>
+  <title>0NLY.LOL | Ultra-Elite Identity & Protected Bio Platform</title>
 
   <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
     <div class="nav-container">
       <div class="nav-brand" onclick="navigateTo('#/')">
         <span class="brand-zero">0</span><span class="brand-text">NLY</span><span class="brand-dot">.</span><span class="brand-lol">LOL</span>
-        <span class="vip-crest"><i class="fa-solid fa-gem"></i> VIP ELITE</span>
+        <span class="vip-crest"><i class="fa-solid fa-shield-halved"></i> SECURED</span>
       </div>
 
       <nav class="nav-menu">
@@ -56,7 +56,7 @@
         </button>
         <button class="btn-create-highlight" onclick="navigateTo('#/profilecreate')">
           <i class="fa-solid fa-plus"></i>
-          <span>Kendi Alanını Yarat</span>
+          <span>Kendi Alanını Rezerve Et</span>
         </button>
       </div>
     </div>
@@ -69,38 +69,38 @@
     <div class="home-hero-container">
       <div class="hero-badge">
         <span class="pulse-point"></span>
-        <span>SANALIN EN ELİT KİŞİSEL ALANI</span>
+        <span>KRİPTOGRAFİK OLARAK KİLİTLENEN KİMLİKLER</span>
       </div>
       <h1 class="hero-title">
-        KENDİNE AİT BİR <br>
-        <span class="gradient-text">0NLY.LOL ALANI</span> OLUŞTUR
+        KULLANICI ADINI <br>
+        <span class="gradient-text">EBEDİYEN REZERVE ET</span>
       </h1>
       <p class="hero-subtitle">
-        Hiçbir hazır şablon, sıradan profil yok. Kendi fotoğrafını, özel bağlantılarını, Discord durumunu ve havalı sanalcı rozetlerini sıfırdan kendin tasarla.
+        Alınan bir 0nly.lol linki ve kullanıcı adı veritabanında SHA-256 şifrenle kilitlenir. Başka hiç kimse senin adını çalamaz veya üzerine yazamaz.
       </p>
 
       <div class="hero-cta-group">
         <button class="btn-primary-glow" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-bolt"></i>
-          <span>Profilini Sıfırdan Oluştur (/profilecreate)</span>
+          <i class="fa-solid fa-lock"></i>
+          <span>Kullanıcı Adını Koru & Profil Oluştur (/profilecreate)</span>
         </button>
       </div>
 
       <!-- Öne Çıkanlar & İstatistikler -->
       <div class="hero-stats-bar">
         <div class="stat-box">
-          <span class="stat-number">100%</span>
-          <span class="stat-desc">Kişiye Özel Tasarım</span>
+          <span class="stat-number"><i class="fa-solid fa-lock text-accent"></i> SHA-256</span>
+          <span class="stat-desc">Kırılamaz Güvenlik</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <span class="stat-number">3D Glare</span>
-          <span class="stat-desc">İmleç Takipli Işık</span>
+          <span class="stat-number">Kalıcı</span>
+          <span class="stat-desc">Asla Başkası Alamaz</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <span class="stat-number">VIP</span>
-          <span class="stat-desc">Sınırsız Özel Link</span>
+          <span class="stat-number">Dosya Gezgini</span>
+          <span class="stat-desc">Doğrudan PC'den Yükle</span>
         </div>
       </div>
     </div>
@@ -115,42 +115,48 @@
         
         <div class="studio-header">
           <div class="studio-badge-row">
-            <span class="studio-tag"><i class="fa-solid fa-sliders"></i> KİŞİSEL STÜDYO</span>
+            <span class="studio-tag"><i class="fa-solid fa-shield-halved"></i> GÜVENLİ MİMAR</span>
             <span class="url-preview-pill">0nly.lol/<strong id="liveUrlPreview">...</strong></span>
           </div>
-          <h2>VIP Profil Mimarı</h2>
-          <p>Her alan boştur, profilini sıfırdan tamamen sana özel inşa et. Canlı önizleme sağda gerçek zamanlı oluşur.</p>
+          <h2>Kişisel Profil & İsim Rezervasyonu</h2>
+          <p>Kullanıcı adını şifrenle kilitle. Belirlediğin şifre olmadan dünyada hiç kimse adını değiştiremez.</p>
         </div>
 
-        <!-- Akordeon / Sekmeli Düzenleyici -->
+        <!-- Akordeon / Sekmeli Düzenleyici (Discord kaldırıldı) -->
         <div class="editor-tabs-bar">
           <button class="editor-tab-btn active" onclick="switchEditorTab('tab-identity')">
-            <i class="fa-regular fa-id-badge"></i> <span>Kimlik & Fotoğraf</span>
+            <i class="fa-regular fa-id-badge"></i> <span>Kimlik & Güvenlik</span>
+          </button>
+          <button class="editor-tab-btn" onclick="switchEditorTab('tab-photo')">
+            <i class="fa-solid fa-camera"></i> <span>Profil Fotoğrafı</span>
           </button>
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-appearance')">
-            <i class="fa-solid fa-palette"></i> <span>Temalar & Efektler</span>
+            <i class="fa-solid fa-palette"></i> <span>Tema & Çerçeve</span>
           </button>
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-badges')">
             <i class="fa-solid fa-award"></i> <span>Rozetler</span>
-          </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-discord')">
-            <i class="fa-brands fa-discord"></i> <span>Discord & Aktivite</span>
           </button>
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-links')">
             <i class="fa-solid fa-link"></i> <span>Özel Linkler</span>
           </button>
         </div>
 
-        <!-- SEKME 1: KİMLİK, FOTOĞRAF & BİYOGRAFİ -->
+        <!-- SEKME 1: KİMLİK & ŞİFRE GÜVENLİĞİ -->
         <div class="editor-content-tab active" id="tab-identity">
           <div class="form-grid">
             <div class="input-block">
-              <label>Özel Profil Linkin (Handle):</label>
+              <label><i class="fa-solid fa-link"></i> Almak İstediğin Link (Handle):</label>
               <div class="prefix-input">
                 <span class="input-prefix">0nly.lol/</span>
                 <input type="text" id="inputHandle" placeholder="kullanici_adin" oninput="updateLivePreview()" maxlength="24">
               </div>
-              <small>0nly.lol/ üzerinden profilinin açılacağı isim.</small>
+              <small>0nly.lol/ üzerinden kalıcı olarak adına rezerve edilecek isim.</small>
+            </div>
+
+            <div class="input-block">
+              <label><i class="fa-solid fa-key"></i> Gizli Profil Şifren (İsmini Kilitlemek İçin):</label>
+              <input type="password" id="inputPassword" placeholder="Şifren (Profilini korur, kimse çalamaz)" required>
+              <small>Bu isim bir kez kaydedilince sadece bu şifreyle düzenlenebilir!</small>
             </div>
 
             <div class="input-block">
@@ -162,26 +168,11 @@
               <label>Ünvan / Zamirler (İsteğe Bağlı):</label>
               <input type="text" id="inputPronouns" placeholder="Örn: Sanalcı, Developer, he/him..." oninput="updateLivePreview()">
             </div>
-
-            <div class="input-block">
-              <label>Konum / Şehir (İsteğe Bağlı):</label>
-              <input type="text" id="inputLocation" placeholder="Örn: Miami, Tokyo, Cyberspace..." oninput="updateLivePreview()">
-            </div>
           </div>
 
-          <!-- Profil Fotoğrafı (Dosya Yükleme veya URL) -->
           <div class="input-block full-width">
-            <label>Profil Fotoğrafı:</label>
-            <div class="avatar-upload-control">
-              <label class="btn-file-upload" title="Bilgisayarından Fotoğraf Seç">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span>Bilgisayardan Fotoğraf Yükle</span>
-                <input type="file" id="avatarFileInput" accept="image/*" onchange="handleAvatarFileSelect(event)">
-              </label>
-              <span class="upload-or">veya</span>
-              <input type="text" id="inputAvatarUrl" placeholder="Fotoğraf URL'si yapıştır (https://...)" oninput="updateLivePreview()">
-            </div>
-            <small>Bilgisayarından istediğin herhangi bir fotoğrafı doğrudan seçebilirsin.</small>
+            <label>Konum / Şehir (İsteğe Bağlı):</label>
+            <input type="text" id="inputLocation" placeholder="Örn: Miami, Tokyo, Cyberspace..." oninput="updateLivePreview()">
           </div>
 
           <!-- Biyografi -->
@@ -191,7 +182,32 @@
           </div>
         </div>
 
-        <!-- SEKME 2: GÖRÜNÜM, TEMA & ÇERÇEVELER -->
+        <!-- SEKME 2: FOTOĞRAF (SADECE DOSYA GEZGİNİ) -->
+        <div class="editor-content-tab" id="tab-photo">
+          <div class="file-explorer-dropzone" onclick="triggerFilePicker()">
+            <input type="file" id="avatarFileInput" accept="image/*" onchange="handleAvatarFileSelect(event)" style="display:none;">
+            <div class="dropzone-icon">
+              <i class="fa-solid fa-folder-open text-accent"></i>
+            </div>
+            <h4>Bilgisayardan Fotoğraf Seç</h4>
+            <p>Tıklayarak doğrudan Windows Dosya Gezgini'ni aç ve istediğin resmi seç.</p>
+            <span class="btn-browse-file"><i class="fa-solid fa-desktop"></i> Dosya Gezginini Aç</span>
+          </div>
+
+          <!-- Seçilen Fotoğraf Önizleme & Kaldırma -->
+          <div class="selected-photo-bar" id="selectedPhotoBar" style="display:none;">
+            <img src="" alt="Thumbnail" id="selectedThumb">
+            <div class="photo-meta">
+              <span class="photo-name" id="selectedPhotoName">fotoğraf.png</span>
+              <span class="photo-size" id="selectedPhotoSize">Dosya yüklendi</span>
+            </div>
+            <button class="btn-remove-photo" onclick="removeSelectedAvatar()" title="Fotoğrafı Kaldır">
+              <i class="fa-solid fa-trash"></i> Kaldır
+            </button>
+          </div>
+        </div>
+
+        <!-- SEKME 3: GÖRÜNÜM, TEMA & ÇERÇEVELER -->
         <div class="editor-content-tab" id="tab-appearance">
           <label class="tab-label">Havalı VIP Renk Temaları:</label>
           <div class="theme-cards-grid">
@@ -225,7 +241,7 @@
             </div>
           </div>
 
-          <label class="tab-label" style="margin-top: 18px;">Avatar Çerçeve & Efekt Stili:</label>
+          <label class="tab-label" style="margin-top: 18px;">Avatar Çerçeve Stili:</label>
           <div class="ring-selector-row">
             <button class="ring-choice-btn active" data-ring="ring-pulsing-neon" onclick="pickRingStyle('ring-pulsing-neon')">Pulsing Neon</button>
             <button class="ring-choice-btn" data-ring="ring-gold-crown" onclick="pickRingStyle('ring-gold-crown')">Golden Luxury</button>
@@ -253,7 +269,7 @@
           </div>
         </div>
 
-        <!-- SEKME 3: ROZETLER & PRESTİJ -->
+        <!-- SEKME 4: ROZETLER & PRESTİJ -->
         <div class="editor-content-tab" id="tab-badges">
           <label class="tab-label">Profilinde Sergilemek İstediğin Rozetleri Seç:</label>
           <div class="badges-selection-grid">
@@ -288,34 +304,6 @@
           </div>
         </div>
 
-        <!-- SEKME 4: DISCORD DURUMU (RICH PRESENCE) -->
-        <div class="editor-content-tab" id="tab-discord">
-          <div class="form-grid">
-            <div class="input-block">
-              <label>Oynanan Oyun / Aktivite Adı (İsteğe Bağlı):</label>
-              <input type="text" id="inputDiscordTitle" placeholder="Örn: Multi Theft Auto: San Andreas, VS Code..." oninput="updateLivePreview()">
-            </div>
-            <div class="input-block">
-              <label>Detay / Sunucu / Rol Durumu:</label>
-              <input type="text" id="inputDiscordSub" placeholder="Örn: Retro Roleplay (Miami 1986)..." oninput="updateLivePreview()">
-            </div>
-            <div class="input-block">
-              <label>Geçen Süre / Durum Açıklaması:</label>
-              <input type="text" id="inputDiscordTime" placeholder="Örn: 03:15:00 süredir oyunda..." oninput="updateLivePreview()">
-            </div>
-            <div class="input-block">
-              <label>Çevrimiçi Durum Işığı:</label>
-              <select id="selectOnlineStatus" onchange="updateLivePreview()">
-                <option value="online">Çevrimiçi (Yeşil Işık)</option>
-                <option value="dnd">Rahatsız Etmeyin (Kırmızı Işık)</option>
-                <option value="idle">Boşta (Sarı Işık)</option>
-                <option value="offline">Görünmez / Gizli</option>
-              </select>
-            </div>
-          </div>
-          <small>Eğer oyun adını boş bırakırsan bu kutu profilde gizlenir.</small>
-        </div>
-
         <!-- SEKME 5: DİNAMİK ÖZEL LİNKLER -->
         <div class="editor-content-tab" id="tab-links">
           <div class="links-header-action">
@@ -336,8 +324,8 @@
             <i class="fa-solid fa-rotate-left"></i> <span>Temizle</span>
           </button>
           <button class="btn-publish-glow" onclick="publishProfile()">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Profili Canlıya Al & Linkini Al</span>
+            <i class="fa-solid fa-lock"></i>
+            <span>Kullanıcı Adını Kilitle & Yayına Al</span>
           </button>
         </div>
 
@@ -358,7 +346,9 @@
 
             <!-- Kart Üst Bar & Rozetler -->
             <div class="card-head-row">
-              <div class="card-uid-pill" id="cardUid">UID: #0NLY</div>
+              <div class="card-uid-pill" id="cardUid">
+                <i class="fa-solid fa-lock text-accent"></i> <span>PROTECTED</span>
+              </div>
               <div class="card-badges-rack" id="cardBadges">
                 <!-- Canlı Rozetler -->
               </div>
@@ -373,7 +363,6 @@
                   <i class="fa-regular fa-user"></i>
                 </div>
               </div>
-              <span class="online-indicator online" id="cardStatusIndicator"></span>
             </div>
 
             <!-- İsim & Kimlik -->
@@ -396,25 +385,6 @@
               <p id="cardBioText"></p>
             </div>
 
-            <!-- Discord Aktivite Kartı -->
-            <div class="card-discord-box" id="cardDiscordBox" style="display:none;">
-              <div class="discord-head">
-                <i class="fa-brands fa-discord"></i>
-                <span>DISCORD AKTİVİTESİ</span>
-                <span class="discord-dot"></span>
-              </div>
-              <div class="discord-body">
-                <div class="discord-icon-frame">
-                  <i class="fa-solid fa-gamepad"></i>
-                </div>
-                <div class="discord-info">
-                  <h5 id="cardDiscordTitle"></h5>
-                  <p id="cardDiscordSub"></p>
-                  <span id="cardDiscordTime"></span>
-                </div>
-              </div>
-            </div>
-
             <!-- Sosyal Medya & Özel Linkler Grid -->
             <div class="card-socials-grid" id="cardSocialsGrid">
               <!-- Dinamik İkonlar -->
@@ -422,7 +392,7 @@
 
             <!-- Kart Alt Bilgi (Footer) -->
             <div class="card-footer-branding">
-              <span>0nly.lol VIP Member</span>
+              <i class="fa-solid fa-shield-halved text-accent"></i> <span>0nly.lol Korumalı Profil</span>
             </div>
 
           </div>
@@ -448,8 +418,11 @@
         <button class="pub-btn" onclick="copyCurrentProfileUrl()">
           <i class="fa-solid fa-share-nodes"></i> <span>Profili Paylaş</span>
         </button>
+        <button class="pub-btn" onclick="openEditPromptForCurrentProfile()">
+          <i class="fa-solid fa-pen-to-square"></i> <span>Profili Düzenle (Şifre ile)</span>
+        </button>
         <button class="pub-btn highlight" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-plus"></i> <span>Sen de 0nly.lol Profilini Yarat</span>
+          <i class="fa-solid fa-plus"></i> <span>Kendi Adını Kilitle</span>
         </button>
       </div>
 

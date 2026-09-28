@@ -88,6 +88,10 @@ body.theme-abyssal-ocean {
   --border-active: rgba(6, 182, 212, 0.55);
 }
 
+.text-accent {
+  color: var(--accent-main);
+}
+
 /* ================= RESET ================= */
 * {
   margin: 0;
@@ -652,51 +656,113 @@ body {
   box-shadow: 0 0 12px var(--accent-glow);
 }
 
-.input-block select option {
-  background: #100b1c;
-  color: #fff;
-}
-
-/* Avatar Dosya Yükleme Kontrolü */
-.avatar-upload-control {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.btn-file-upload {
-  background: var(--accent-surface);
-  border: 1px dashed var(--accent-main);
-  color: #fff;
-  padding: 9px 16px;
-  border-radius: 10px;
-  font-size: 12.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ================= DOSYA GEZGİNİ DROPZONE ALANI ================= */
+.file-explorer-dropzone {
+  background: rgba(255, 255, 255, 0.025);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 34px 20px;
+  text-align: center;
   cursor: pointer;
   transition: var(--trans-snappy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
-.btn-file-upload:hover {
-  background: var(--accent-main);
+.file-explorer-dropzone:hover {
+  background: var(--accent-surface);
+  border-color: var(--accent-main);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.dropzone-icon {
+  font-size: 40px;
+  margin-bottom: 4px;
+}
+
+.file-explorer-dropzone h4 {
+  font-size: 15px;
+  font-weight: 700;
   color: #fff;
 }
-.btn-file-upload input[type="file"] {
-  display: none;
+.file-explorer-dropzone p {
+  font-size: 12px;
+  color: var(--text-gray);
+  max-width: 400px;
 }
 
-.upload-or {
+.btn-browse-file {
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-alt));
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Seçilen Fotoğraf Önizleme Çubuğu */
+.selected-photo-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 14px;
+}
+
+.selected-photo-bar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-main);
+}
+
+.photo-meta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+}
+
+.photo-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.photo-size {
   font-size: 11px;
   color: var(--text-dim);
-  font-weight: 600;
-  text-transform: uppercase;
 }
 
-.avatar-upload-control input[type="text"] {
-  flex: 1;
-  min-width: 220px;
+.btn-remove-photo {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--trans-snappy);
+}
+.btn-remove-photo:hover {
+  background: #ef4444;
+  color: #fff;
 }
 
 /* Tema Seçici Kartlar */
@@ -1105,6 +1171,9 @@ body {
   padding: 3px 8px;
   border-radius: 6px;
   border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .card-badges-rack {
@@ -1208,21 +1277,6 @@ body {
   100% { transform: scale(1.05); opacity: 1; }
 }
 
-.online-indicator {
-  position: absolute;
-  bottom: 2px;
-  right: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  z-index: 3;
-  border: 3px solid #0f0a1c;
-}
-.online-indicator.online { background-color: #10b981; box-shadow: 0 0 6px #10b981; }
-.online-indicator.dnd { background-color: #ef4444; box-shadow: 0 0 6px #ef4444; }
-.online-indicator.idle { background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
-.online-indicator.offline { display: none; }
-
 /* Kart Kimlik */
 .card-identity-box {
   text-align: center;
@@ -1285,72 +1339,6 @@ body {
   white-space: pre-line;
 }
 
-/* Discord Kutusu */
-.card-discord-box {
-  width: 100%;
-  background: rgba(88, 101, 242, 0.08);
-  border: 1px solid rgba(88, 101, 242, 0.22);
-  border-radius: 12px;
-  padding: 10px 12px;
-  margin-bottom: 16px;
-}
-
-.discord-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  color: #818cf8;
-  margin-bottom: 6px;
-}
-.discord-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
-  margin-left: auto;
-}
-
-.discord-body {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.discord-icon-frame {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: var(--accent-main);
-}
-
-.discord-info h5 {
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.discord-info p {
-  font-size: 11px;
-  color: var(--text-gray);
-}
-.discord-info span {
-  font-size: 9.5px;
-  color: var(--text-dim);
-  font-family: var(--font-code);
-}
-
 /* Sosyal İkonlar & Özel Linkler */
 .card-socials-grid {
   display: flex;
@@ -1387,6 +1375,9 @@ body {
   font-size: 10.5px;
   color: var(--text-dim);
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* ================= 3. GÖRÜNÜM: HALKA AÇIK PROFİL (#/{username}) ================= */

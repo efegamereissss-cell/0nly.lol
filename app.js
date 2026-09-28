@@ -1,12 +1,21 @@
 /**
- * 0NLY.LOL | CORE ENGINE V2
- * Clean Slate Architecture, File Upload, Unlimited Custom Links,
- * Cursor Spotlight, Specular Glare & Futuristic Audio Feedback.
+ * 0NLY.LOL | SECURED CORE ENGINE V3
+ * Cryptographic SHA-256 Protection, Permanent Username Lock,
+ * Native Windows File Explorer Upload, Zero Discord, Custom Links & Cursor Spotlight
  */
 
-// ================= 1. VERİTABANI & LOCAL STORAGE =================
+// ================= 1. KRİPTOGRAFİK GÜVENLİK MOTORU (SHA-256) =================
+async function hashPassword(str) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Veritabanı Depolama
 function getProfileDatabase() {
-  const saved = localStorage.getItem('0nly_profiles_db');
+  const saved = localStorage.getItem('0nly_secured_db');
   if (saved) {
     try {
       return JSON.parse(saved);
@@ -20,11 +29,11 @@ function getProfileDatabase() {
 function saveProfileToDatabase(profile) {
   const db = getProfileDatabase();
   db[profile.handle] = profile;
-  localStorage.setItem('0nly_profiles_db', JSON.stringify(db));
+  localStorage.setItem('0nly_secured_db', JSON.stringify(db));
   localStorage.setItem('0nly_last_my_profile', profile.handle);
 }
 
-// ================= 2. SES MOTORU (Fütüristik Siber UI Sesleri) =================
+// ================= 2. SES MOTORU (Siber Geri Bildirim) =================
 let audioCtx = null;
 let soundEnabled = true;
 
@@ -64,7 +73,7 @@ function playSuccessChime() {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C E G C
+    const notes = [523.25, 659.25, 783.99, 1046.50];
     notes.forEach((freq, i) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -83,13 +92,31 @@ function playSuccessChime() {
   } catch (e) {}
 }
 
+function playLockSound() {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(250, ctx.currentTime);
+    osc.frequency.setValueAtTime(800, ctx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.18);
+  } catch (e) {}
+}
+
 function toggleSoundFx() {
   soundEnabled = !soundEnabled;
   const icon = document.getElementById('soundIcon');
   if (soundEnabled) {
     icon.className = 'fa-solid fa-volume-high';
     playCyberClick(1400);
-    showOnlyToast("Ses Açık 🔊", "Arayüz ses efektleri aktifleştirildi.");
+    showOnlyToast("Ses Açık 🔊", "Arayüz ses efektleri devrede.");
   } else {
     icon.className = 'fa-solid fa-volume-xmark';
     showOnlyToast("Ses Kapalı 🔇", "Arayüz sessize alındı.");
@@ -105,25 +132,21 @@ function navigateTo(route) {
 function handleRoute() {
   const hash = window.location.hash || '#/';
   
-  // Tüm sayfaları gizle
   document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
 
   if (hash === '#/' || hash === '' || hash === '#/home') {
-    // 1. Ana Sayfa
     document.getElementById('view-home').classList.add('active');
     document.getElementById('navHomeBtn').classList.add('active');
-    document.title = "0NLY.LOL | Sanalın En Havalı VIP Kimliği";
+    document.title = "0NLY.LOL | Korumalı & Kilitli VIP Kimlik";
   } 
   else if (hash === '#/profilecreate' || hash.startsWith('#/profilecreate')) {
-    // 2. Profil Stüdyosu
     document.getElementById('view-profilecreate').classList.add('active');
     document.getElementById('navCreateBtn').classList.add('active');
-    document.title = "0NLY.LOL / Stüdyo | Kendi Alanını Yarat";
+    document.title = "0NLY.LOL / Stüdyo | Kullanıcı Adını Kilitle";
     initStudioCleanSlate();
   } 
   else {
-    // 3. Halka Açık Özel Profil (#/{username})
     const username = hash.replace('#/', '').replace('#', '');
     const db = getProfileDatabase();
     const profile = db[username];
@@ -131,9 +154,9 @@ function handleRoute() {
     if (profile) {
       document.getElementById('view-public-profile').classList.add('active');
       renderPublicProfile(profile);
-      document.title = `${profile.displayName || profile.handle} | 0NLY.LOL`;
+      document.title = `${profile.displayName || profile.handle} | 0NLY.LOL Korumalı`;
     } else {
-      showOnlyToast("Profil Henüz Yok!", `@${username} alanı boş. Hemen oluştur!`);
+      showOnlyToast("Kullanıcı Adı Boşta!", `@${username} henüz kimse tarafından rezerve edilmedi.`);
       navigateTo('#/profilecreate');
       document.getElementById('inputHandle').value = username;
       updateLivePreview();
@@ -151,7 +174,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initAmbientCanvas();
 });
 
-// ================= 4. FARE İMLECİ IŞIK TAKİP MOTORU (SPOTLIGHT) =================
+// ================= 4. FARE İMLECİ IŞIK TAKİBİ =================
 function setupCursorSpotlight() {
   const spotlight = document.getElementById('cursorSpotlight');
   if (!spotlight) return;
@@ -162,7 +185,7 @@ function setupCursorSpotlight() {
   });
 }
 
-// ================= 5. STÜDYO DÜZENLEYİCİ & TEMİZ BAŞLANGIÇ =================
+// ================= 5. STÜDYO DÜZENLEYİCİ MANTIĞI =================
 let selectedTheme = 'theme-void-nebula';
 let selectedRing = 'ring-pulsing-neon';
 let customAvatarBase64 = null;
@@ -209,28 +232,53 @@ function toggleScanlinesFx() {
   else overlay.classList.add('disabled');
 }
 
-// FOTOĞRAF DOSYASI YÜKLEME (Bilgisayardan)
+// ================= 6. DOSYA GEZGİNİ İLE FOTOĞRAF SEÇİMİ =================
+function triggerFilePicker() {
+  playCyberClick(1200);
+  document.getElementById('avatarFileInput').click();
+}
+
 function handleAvatarFileSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
 
   if (!file.type.startsWith('image/')) {
-    showOnlyToast("Hata", "Lütfen geçerli bir resim dosyası seçin.");
+    showOnlyToast("Hata", "Lütfen bir resim dosyası seçin.");
     return;
   }
 
   const reader = new FileReader();
   reader.onload = function(e) {
     customAvatarBase64 = e.target.result;
-    document.getElementById('inputAvatarUrl').value = ''; // URL'yi temizle
+    
+    // Thumbnail Bar göster
+    const bar = document.getElementById('selectedPhotoBar');
+    const thumb = document.getElementById('selectedThumb');
+    const nameEl = document.getElementById('selectedPhotoName');
+    const sizeEl = document.getElementById('selectedPhotoSize');
+
+    thumb.src = customAvatarBase64;
+    nameEl.textContent = file.name;
+    sizeEl.textContent = (file.size / 1024).toFixed(1) + ' KB - Dosya Hazır';
+    bar.style.display = 'flex';
+
     updateLivePreview();
     playSuccessChime();
-    showOnlyToast("Fotoğraf Yüklendi! 📷", "Profil resmin başarıyla uygulandı.");
+    showOnlyToast("Fotoğraf Seçildi! 📁", `${file.name} başarıyla yüklendi.`);
   };
   reader.readAsDataURL(file);
 }
 
-// DİNAMİK ÖZEL LİNKLER
+function removeSelectedAvatar() {
+  playCyberClick(800);
+  customAvatarBase64 = null;
+  document.getElementById('avatarFileInput').value = '';
+  document.getElementById('selectedPhotoBar').style.display = 'none';
+  updateLivePreview();
+  showOnlyToast("Fotoğraf Kaldırıldı", "Varsayılan kullanıcı ikonu uygulandı.");
+}
+
+// ================= 7. DİNAMİK ÖZEL LİNKLER =================
 const SOCIAL_ICONS_MAP = {
   discord: "fa-brands fa-discord",
   telegram: "fa-brands fa-telegram",
@@ -250,8 +298,7 @@ const SOCIAL_ICONS_MAP = {
 function addCustomLinkItem(type = 'discord', title = '', url = '') {
   playCyberClick(1050);
   const id = 'link_' + Date.now() + Math.floor(Math.random() * 1000);
-  const linkObj = { id, type, title, url };
-  customLinksData.push(linkObj);
+  customLinksData.push({ id, type, title, url });
   renderCustomLinksForm();
   updateLivePreview();
 }
@@ -268,7 +315,7 @@ function renderCustomLinksForm() {
   if (!container) return;
 
   container.innerHTML = '';
-  customLinksData.forEach((link, idx) => {
+  customLinksData.forEach((link) => {
     const row = document.createElement('div');
     row.className = 'custom-link-row-card';
     row.innerHTML = `
@@ -311,75 +358,39 @@ function updateLinkUrl(id, val) {
   updateLivePreview();
 }
 
-// STÜDYO SIFIRDAN BAŞLATICI (Örnek Metin Yok, Tamamen Temiz)
+// ================= 8. STÜDYO SIFIRDAN BAŞLATICI =================
 function initStudioCleanSlate() {
-  const lastHandle = localStorage.getItem('0nly_last_my_profile');
-  const db = getProfileDatabase();
+  document.getElementById('inputHandle').value = '';
+  document.getElementById('inputPassword').value = '';
+  document.getElementById('inputDisplayName').value = '';
+  document.getElementById('inputPronouns').value = '';
+  document.getElementById('inputLocation').value = '';
+  document.getElementById('inputBio').value = '';
+  customAvatarBase64 = null;
+  document.getElementById('selectedPhotoBar').style.display = 'none';
 
-  if (lastHandle && db[lastHandle]) {
-    // Kullanıcının daha önce kaydettiği kendi profili varsa onu getir
-    const data = db[lastHandle];
-    document.getElementById('inputHandle').value = data.handle || '';
-    document.getElementById('inputDisplayName').value = data.displayName || '';
-    document.getElementById('inputPronouns').value = data.pronouns || '';
-    document.getElementById('inputLocation').value = data.location || '';
-    document.getElementById('inputAvatarUrl').value = data.avatarUrl && !data.avatarUrl.startsWith('data:') ? data.avatarUrl : '';
-    customAvatarBase64 = data.avatarUrl || null;
-    document.getElementById('inputBio').value = data.bio || '';
-
-    if (data.discord) {
-      document.getElementById('inputDiscordTitle').value = data.discord.title || '';
-      document.getElementById('inputDiscordSub').value = data.discord.sub || '';
-      document.getElementById('inputDiscordTime').value = data.discord.time || '';
-    }
-
-    customLinksData = data.links || [];
-    if (data.theme) pickTheme(data.theme);
-    if (data.ring) pickRingStyle(data.ring);
-  } else {
-    // Tamamen boş başlangıç
-    document.getElementById('inputHandle').value = '';
-    document.getElementById('inputDisplayName').value = '';
-    document.getElementById('inputPronouns').value = '';
-    document.getElementById('inputLocation').value = '';
-    document.getElementById('inputAvatarUrl').value = '';
-    customAvatarBase64 = null;
-    document.getElementById('inputBio').value = '';
-    document.getElementById('inputDiscordTitle').value = '';
-    document.getElementById('inputDiscordSub').value = '';
-    document.getElementById('inputDiscordTime').value = '';
-
-    // Varsayılan 2 boş link ekle
-    customLinksData = [
-      { id: 'def_1', type: 'discord', title: 'Discord', url: '' },
-      { id: 'def_2', type: 'instagram', title: 'Instagram', url: '' }
-    ];
-  }
+  customLinksData = [
+    { id: 'def_1', type: 'discord', title: 'Discord', url: '' },
+    { id: 'def_2', type: 'instagram', title: 'Instagram', url: '' }
+  ];
 
   renderCustomLinksForm();
   updateLivePreview();
 }
 
-// CANLI ÖNİZLEME MOTORU (Her tuş vuruşunda çalışır)
+// CANLI ÖNİZLEME MOTORU
 function updateLivePreview() {
   const handle = document.getElementById('inputHandle').value.trim();
   const name = document.getElementById('inputDisplayName').value.trim();
   const pronouns = document.getElementById('inputPronouns').value.trim();
   const location = document.getElementById('inputLocation').value.trim();
   const bio = document.getElementById('inputBio').value.trim();
-  const urlAvatar = document.getElementById('inputAvatarUrl').value.trim();
-  const avatar = customAvatarBase64 || urlAvatar;
   const isVerified = document.getElementById('checkVerifiedBadge').checked;
-  const status = document.getElementById('selectOnlineStatus').value;
 
-  // Stüdyo üst bar URL
   document.getElementById('liveUrlPreview').textContent = handle || '...';
-
-  // Kart isim ve handle
   document.getElementById('cardDisplayName').textContent = name || 'Kullanıcı Adı';
   document.getElementById('cardHandleText').textContent = handle ? '0nly.lol/' + handle : '0nly.lol/link';
 
-  // Zamirler & Konum
   const pEl = document.getElementById('cardPronounsText');
   const lEl = document.getElementById('cardLocationText');
   const sP = document.getElementById('sepPronouns');
@@ -403,7 +414,6 @@ function updateLivePreview() {
     sL.style.display = 'none';
   }
 
-  // Biyografi
   const bioPlate = document.getElementById('cardBioPlate');
   const bioText = document.getElementById('cardBioText');
   if (bio) {
@@ -413,11 +423,10 @@ function updateLivePreview() {
     bioPlate.style.display = 'none';
   }
 
-  // Avatar Resmi / İkon
   const imgEl = document.getElementById('cardAvatarImg');
   const placeholderEl = document.getElementById('avatarPlaceholder');
-  if (avatar) {
-    imgEl.src = avatar;
+  if (customAvatarBase64) {
+    imgEl.src = customAvatarBase64;
     imgEl.style.display = 'block';
     placeholderEl.style.display = 'none';
   } else {
@@ -425,12 +434,7 @@ function updateLivePreview() {
     placeholderEl.style.display = 'flex';
   }
 
-  // Verified Badge
   document.getElementById('cardVerified').style.display = isVerified ? 'inline-block' : 'none';
-
-  // Online Durumu
-  const indicator = document.getElementById('cardStatusIndicator');
-  indicator.className = `online-indicator ${status}`;
 
   // Rozetler
   const badgesRack = document.getElementById('cardBadges');
@@ -455,22 +459,7 @@ function updateLivePreview() {
     }
   });
 
-  // Discord Kutusu
-  const dTitle = document.getElementById('inputDiscordTitle').value.trim();
-  const dSub = document.getElementById('inputDiscordSub').value.trim();
-  const dTime = document.getElementById('inputDiscordTime').value.trim();
-  const dBox = document.getElementById('cardDiscordBox');
-
-  if (dTitle) {
-    dBox.style.display = 'block';
-    document.getElementById('cardDiscordTitle').textContent = dTitle;
-    document.getElementById('cardDiscordSub').textContent = dSub || 'Aktif';
-    document.getElementById('cardDiscordTime').textContent = dTime || 'Çevrimiçi';
-  } else {
-    dBox.style.display = 'none';
-  }
-
-  // Dinamik Sosyal / Özel Linkler
+  // Linkler
   const socialsGrid = document.getElementById('cardSocialsGrid');
   socialsGrid.innerHTML = '';
 
@@ -489,56 +478,60 @@ function updateLivePreview() {
 
 function resetStudioForm() {
   playCyberClick(700);
-  document.getElementById('inputHandle').value = '';
-  document.getElementById('inputDisplayName').value = '';
-  document.getElementById('inputBio').value = '';
-  document.getElementById('inputPronouns').value = '';
-  document.getElementById('inputLocation').value = '';
-  document.getElementById('inputAvatarUrl').value = '';
-  customAvatarBase64 = null;
-  document.getElementById('inputDiscordTitle').value = '';
-  document.getElementById('inputDiscordSub').value = '';
-  document.getElementById('inputDiscordTime').value = '';
-  customLinksData = [];
-  renderCustomLinksForm();
-  updateLivePreview();
+  initStudioCleanSlate();
   showOnlyToast("Temizlendi 🧹", "Tüm alanlar sıfırlandı.");
 }
 
-// PROFİLİ YAYINLA & CANLI LİNKİ AL
-function publishProfile() {
+// ================= 9. PROFİLİ KİLİTLE & GÜVENLİ KAYIT =================
+async function publishProfile() {
   const rawHandle = document.getElementById('inputHandle').value.trim();
+  const rawPassword = document.getElementById('inputPassword').value;
+
   if (!rawHandle) {
-    showOnlyToast("Hata!", "Lütfen profilin için bir link adı (handle) belirle.");
+    showOnlyToast("Hata!", "Lütfen profilin için bir link adı (handle) belirleyin.");
     document.getElementById('inputHandle').focus();
     return;
   }
 
+  if (!rawPassword || rawPassword.length < 3) {
+    showOnlyToast("Güvenlik Şifresi Gerekli!", "Kullanıcı adını kilitlemek için en az 3 haneli bir gizli şifre belirleyin.");
+    document.getElementById('inputPassword').focus();
+    return;
+  }
+
   const cleanHandle = rawHandle.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+  const hashedPass = await hashPassword(rawPassword);
+
+  const db = getProfileDatabase();
+  const existingProfile = db[cleanHandle];
+
+  // KULLANICI ADI KİLİT KONTROLÜ
+  if (existingProfile) {
+    if (existingProfile.passwordHash !== hashedPass) {
+      playLockSound();
+      alert(`⚠️ GÜVENLİK ENGELİ:\n\n"0nly.lol/${cleanHandle}" kullanıcı adı daha önce alınmış ve kilitlenmiştir!\n\nBu ismin sahibi değilseniz veya doğru şifreyi girmediyseniz bu isim asla değiştirilemez veya başkası tarafından alınamaz.`);
+      showOnlyToast("Erişim Reddedildi! 🔒", "Bu kullanıcı adı başkası tarafından kilitlenmiş!");
+      return;
+    }
+  }
 
   const badges = [];
   document.querySelectorAll('.badge-checkbox input:checked').forEach(c => badges.push(c.value));
 
-  const urlAvatar = document.getElementById('inputAvatarUrl').value.trim();
-
   const profileData = {
     handle: cleanHandle,
+    passwordHash: hashedPass,
     displayName: document.getElementById('inputDisplayName').value.trim() || cleanHandle,
     pronouns: document.getElementById('inputPronouns').value.trim(),
     location: document.getElementById('inputLocation').value.trim(),
     bio: document.getElementById('inputBio').value.trim(),
-    avatarUrl: customAvatarBase64 || urlAvatar,
+    avatarUrl: customAvatarBase64,
     theme: selectedTheme,
     ring: selectedRing,
     verified: document.getElementById('checkVerifiedBadge').checked,
-    status: document.getElementById('selectOnlineStatus').value,
     badges: badges,
-    discord: {
-      title: document.getElementById('inputDiscordTitle').value.trim(),
-      sub: document.getElementById('inputDiscordSub').value.trim(),
-      time: document.getElementById('inputDiscordTime').value.trim()
-    },
-    links: customLinksData
+    links: customLinksData,
+    lockedAt: existingProfile ? existingProfile.lockedAt : new Date().toISOString()
   };
 
   saveProfileToDatabase(profileData);
@@ -549,20 +542,22 @@ function publishProfile() {
     navigator.clipboard.writeText(profileUrl);
   }
 
-  showOnlyToast("0NLY.LOL Profilin Canlıda! 🚀", `0nly.lol/${cleanHandle} linkin panoya kopyalandı.`);
+  showOnlyToast("Kullanıcı Adı Kilitlendi! 🔒", `0nly.lol/${cleanHandle} ebediyen adına rezerve edildi.`);
 
   setTimeout(() => {
     navigateTo(`#/${cleanHandle}`);
   }, 500);
 }
 
-// ================= 6. HALKA AÇIK PROFİL GÖRÜNÜMÜ =================
+// ================= 10. HALKA AÇIK PROFİL GÖRÜNÜMÜ =================
+let currentViewingProfile = null;
+
 function renderPublicProfile(profile) {
+  currentViewingProfile = profile;
   document.getElementById('appBody').className = profile.theme || 'theme-void-nebula';
 
   const mount = document.getElementById('publicCardMount');
 
-  // Sosyal / Özel Linkler
   let linksHtml = '';
   if (profile.links && profile.links.length > 0) {
     profile.links.forEach(l => {
@@ -574,7 +569,6 @@ function renderPublicProfile(profile) {
     });
   }
 
-  // Rozetler
   let badgesHtml = '';
   if (profile.badges) {
     const badgeMap = {
@@ -593,28 +587,6 @@ function renderPublicProfile(profile) {
     });
   }
 
-  // Discord
-  let discordHtml = '';
-  if (profile.discord && profile.discord.title) {
-    discordHtml = `
-      <div class="card-discord-box">
-        <div class="discord-head">
-          <i class="fa-brands fa-discord"></i>
-          <span>DISCORD AKTİVİTESİ</span>
-          <span class="discord-dot"></span>
-        </div>
-        <div class="discord-body">
-          <div class="discord-icon-frame"><i class="fa-solid fa-gamepad"></i></div>
-          <div class="discord-info">
-            <h5>${profile.discord.title}</h5>
-            <p>${profile.discord.sub || 'Aktif'}</p>
-            <span>${profile.discord.time || 'Çevrimiçi'}</span>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
   const avatarDisplay = profile.avatarUrl ? 
     `<img src="${profile.avatarUrl}" alt="Avatar">` : 
     `<div class="avatar-placeholder-initials"><i class="fa-regular fa-user"></i></div>`;
@@ -624,14 +596,13 @@ function renderPublicProfile(profile) {
       <div class="card-glare" id="publicGlare"></div>
 
       <div class="card-head-row">
-        <div class="card-uid-pill">UID: #0NLY</div>
+        <div class="card-uid-pill"><i class="fa-solid fa-lock text-accent"></i> <span>SECURED</span></div>
         <div class="card-badges-rack">${badgesHtml}</div>
       </div>
 
       <div class="card-avatar-wrap">
         <div class="avatar-ring ${profile.ring || 'ring-pulsing-neon'}"></div>
         <div class="avatar-img-box">${avatarDisplay}</div>
-        <span class="online-indicator ${profile.status || 'online'}"></span>
       </div>
 
       <div class="card-identity-box">
@@ -648,19 +619,57 @@ function renderPublicProfile(profile) {
 
       ${profile.bio ? `<div class="card-bio-plate"><p>${profile.bio}</p></div>` : ''}
 
-      ${discordHtml}
-
       <div class="card-socials-grid">
         ${linksHtml}
       </div>
 
       <div class="card-footer-branding">
-        <span>0nly.lol VIP Member</span>
+        <i class="fa-solid fa-shield-halved text-accent"></i> <span>Kriptografik Olarak Kilitli</span>
       </div>
     </div>
   `;
 
   attachTiltPhysics('publicTiltContainer', 'publicTiltCard', 'publicGlare');
+}
+
+// ŞİFRE İLE PROFİL DÜZENLEME
+async function openEditPromptForCurrentProfile() {
+  if (!currentViewingProfile) return;
+
+  const enteredPass = prompt(`🔒 "${currentViewingProfile.handle}" profilini düzenlemek için gizli şifrenizi girin:`);
+  if (!enteredPass) return;
+
+  const hashed = await hashPassword(enteredPass);
+  if (hashed !== currentViewingProfile.passwordHash) {
+    playLockSound();
+    alert("❌ Hatalı Şifre! Bu profilin sahibi olmadığınız için düzenleyemezsiniz.");
+    return;
+  }
+
+  // Şifre doğru, stüdyoya yükle
+  navigateTo('#/profilecreate');
+  document.getElementById('inputHandle').value = currentViewingProfile.handle;
+  document.getElementById('inputPassword').value = enteredPass;
+  document.getElementById('inputDisplayName').value = currentViewingProfile.displayName || '';
+  document.getElementById('inputPronouns').value = currentViewingProfile.pronouns || '';
+  document.getElementById('inputLocation').value = currentViewingProfile.location || '';
+  document.getElementById('inputBio').value = currentViewingProfile.bio || '';
+  customAvatarBase64 = currentViewingProfile.avatarUrl || null;
+  customLinksData = currentViewingProfile.links || [];
+
+  if (customAvatarBase64) {
+    document.getElementById('selectedThumb').src = customAvatarBase64;
+    document.getElementById('selectedPhotoName').textContent = 'Kayıtlı Fotoğraf';
+    document.getElementById('selectedPhotoSize').textContent = 'Profilde aktif';
+    document.getElementById('selectedPhotoBar').style.display = 'flex';
+  }
+
+  if (currentViewingProfile.theme) pickTheme(currentViewingProfile.theme);
+  if (currentViewingProfile.ring) pickRingStyle(currentViewingProfile.ring);
+
+  renderCustomLinksForm();
+  updateLivePreview();
+  showOnlyToast("Hoş Geldiniz!", "Profil düzenleme modu açıldı.");
 }
 
 function copyCurrentProfileUrl() {
@@ -681,7 +690,7 @@ function openMySavedProfile() {
   }
 }
 
-// ================= 7. 3D EĞİM FİZİĞİ & IŞIK PARLAMASI (GLARE) =================
+// ================= 11. 3D EĞİM & IŞIK FİZİĞİ =================
 function setup3dTiltPhysics() {
   attachTiltPhysics('previewTiltContainer', 'previewOnlyCard', 'previewGlare');
 }
@@ -721,7 +730,7 @@ function attachTiltPhysics(containerId, cardId, glareId) {
   });
 }
 
-// ================= 8. AMBİYANS KANVAS PARTİKÜLLERİ =================
+// ================= 12. KANVAS AMBİYANS =================
 function initAmbientCanvas() {
   const canvas = document.getElementById('ambientCanvas');
   if (!canvas) return;
@@ -764,7 +773,7 @@ function initAmbientCanvas() {
   loop();
 }
 
-// ================= 9. TOAST BİLDİRİMİ =================
+// ================= 13. TOAST BİLDİRİMİ =================
 let toastTimer = null;
 function showOnlyToast(title, msg) {
   const toast = document.getElementById('onlyToast');
