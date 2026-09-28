@@ -15,8 +15,29 @@
   
   <!-- Ana Stil Dosyası -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- PKS Güvenlik, Anti-Inspect, DDoS ve Discord Webhook Koruma Motoru -->
+  <script src="security.js"></script>
 </head>
 <body class="light-mode">
+
+  <!-- ================= PKS DDOS & BOT DOĞRULAMA KALKANI ================= -->
+  <div class="pks-ddos-shield-overlay" id="pksDdosShield">
+    <div class="shield-card-box">
+      <div class="shield-icon-radar">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div class="radar-pulse-ring"></div>
+      </div>
+      <h3>PKS FİNANSAL GÜVENLİK KALKANI</h3>
+      <p id="shieldVerifyText"><i class="fa-solid fa-spinner fa-spin"></i> Tarayıcı ve bağlantı güvenliğiniz doğrulanıyor...</p>
+      <div class="shield-progress-track">
+        <div class="shield-progress-fill" id="shieldProgressBar"></div>
+      </div>
+      <div class="shield-footer-badge">
+        <i class="fa-solid fa-lock"></i> <span>256-Bit SSL • DDoS & Anti-Bot Koruması Aktif</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Üst Canlı Piyasa Şeridi (Live Market Ticker) -->
   <div class="market-ticker-bar">
@@ -46,6 +67,8 @@
       <nav class="nav-links">
         <a href="#yatirim" class="nav-link">Borsa & Midas</a>
         <a href="#eticaret" class="nav-link">E-Ticaret</a>
+        <a href="#onerilen-araclar" class="nav-link">Öneri Araçlar</a>
+        <a href="#tavsiyeler" class="nav-link">Altın Tavsiyeler</a>
         <a href="#rehber-test" class="nav-link">Model Seçici</a>
         <a href="#hesaplayici" class="nav-link">Hesaplayıcı</a>
         <a href="#iletisim" class="nav-link">İletişim</a>
@@ -191,6 +214,12 @@
             <li><i class="fa-solid fa-check text-green"></i> SPK ve SEC lisanslı devlet güvencesi</li>
             <li><i class="fa-solid fa-check text-green"></i> Dolar bazlı enflasyondan tam koruma</li>
           </ul>
+          <div class="card-action-footer">
+            <a href="https://investor.vanguard.com/investment-products/etfs/profile/voo" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Vanguard VOO Fonunu İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
         </div>
 
         <div class="white-card guide-card">
@@ -207,6 +236,12 @@
             <li><i class="fa-solid fa-check text-green"></i> Temettüyü tekrar yatırarak kartopu etkisi</li>
             <li><i class="fa-solid fa-check text-green"></i> Erken yaşta finansal özgürlük</li>
           </ul>
+          <div class="card-action-footer">
+            <a href="https://www.realtyincome.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Realty Income (O) İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
         </div>
 
         <div class="white-card guide-card">
@@ -222,6 +257,12 @@
             <li><i class="fa-solid fa-check text-green"></i> 5-10 yıllık vadede kanıtlanmış kazanç</li>
             <li><i class="fa-solid fa-check text-green"></i> Midas üzerinden otomatik alım emri</li>
           </ul>
+          <div class="card-action-footer">
+            <a href="https://tr.tradingview.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>TradingView ile Grafikleri İzle</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
         </div>
 
       </div>
@@ -256,45 +297,517 @@
         
         <div class="white-card ecom-card">
           <div class="ecom-badge">GLOBAL MARKA</div>
-          <div class="ecom-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-          <h3>Shopify & Özel Marka</h3>
+          <div class="ecom-icon"><i class="fa-brands fa-shopify"></i></div>
+          <h3>Shopify & Bağımsız Marka</h3>
           <p>Kendi alan adınla şık bir web mağazası aç. Belirli bir nişe odaklanarak (deri ürünler, kahve aksesuarları veya lüks takılar) sosyal medya reklamlarıyla doğrudan dünyaya sat.</p>
           <div class="ecom-meta-row">
             <span>Sermaye: <strong>Düşük - Orta</strong></span>
             <span>Potansiyel: <strong>Sınırsız Ölçek</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://www.shopify.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Shopify Mağazanı Kur</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
         </div>
 
         <div class="white-card ecom-card">
           <div class="ecom-badge">300M MÜŞTERİ</div>
           <div class="ecom-icon"><i class="fa-brands fa-amazon"></i></div>
-          <h3>Amazon FBA</h3>
+          <h3>Amazon FBA (Global Fulfillment)</h3>
           <p>Ürünlerini üreticiden alıp doğrudan Amazon'un ABD/Avrupa depolarına gönder. Müşteri sipariş verdiğinde kargolamayı ve iadeleri Amazon halletsin, sen karını topla.</p>
           <div class="ecom-meta-row">
             <span>Sermaye: <strong>Orta - Yüksek</strong></span>
             <span>Özellik: <strong>Pasif Lojistik</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://sell.amazon.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Amazon Satıcı Paneli</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
         </div>
 
         <div class="white-card ecom-card">
           <div class="ecom-badge highlight">%95 NET KAR</div>
           <div class="ecom-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-          <h3>Dijital Ürün Satışı (Gumroad / Etsy)</h3>
+          <h3>Gumroad ile Dijital Dosya / Şablon</h3>
           <p>Kargo yok, stok yok, maliyet sıfır! Notion şablonları, bütçe tabloları veya tasarım paketleri üretip sınırsız kez satarak net dolar karı elde et.</p>
           <div class="ecom-meta-row">
             <span>Sermaye: <strong>0 TL Başlangıç</strong></span>
-            <span>Kar Marjı: <strong>%95 Net</strong></span>
+            <span>Kar Marjı: <strong>%95 Net Dolar</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Gumroad'da Satışa Başla</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
         </div>
 
         <div class="white-card ecom-card">
-          <div class="ecom-badge">TÜRKİYE</div>
-          <div class="ecom-icon"><i class="fa-solid fa-truck-fast"></i></div>
-          <h3>Trendyol & Hepsiburada</h3>
-          <p>Türkiye'nin dev pazaryerlerinde yerel toptancılardan aldığın popüler ürünleri hızlı kargo avantajıyla milyonlarca Türk alıcıya ulaştır.</p>
+          <div class="ecom-badge">TASARIM & EL İŞİ</div>
+          <div class="ecom-icon"><i class="fa-brands fa-etsy"></i></div>
+          <h3>Etsy ile Dijital Tasarım & Sanat</h3>
+          <p>Canva ile hazırladığın düğün davetiyeleri, dijital ajandalar veya el yapımı lüks aksesuarları Amerika ve Avrupa'daki 90 milyon alıcıya sun.</p>
           <div class="ecom-meta-row">
-            <span>Sermaye: <strong>Düşük</strong></span>
-            <span>Hız: <strong>24 Saatte Satış</strong></span>
+            <span>Sermaye: <strong>Çok Düşük</strong></span>
+            <span>Kitle: <strong>Global Kadın & Hediye</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://www.etsy.com/sell" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Etsy Mağazası Başlat</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="white-card ecom-card">
+          <div class="ecom-badge highlight">STOKSUZ GİYİM</div>
+          <div class="ecom-icon"><i class="fa-solid fa-shirt"></i></div>
+          <h3>Printful (Print on Demand)</h3>
+          <p>Kendi giyim markanı kur. Sipariş geldikçe Printful tişört veya kapüşonluyu otomatik basıp müşterine kargolar. Sen sıfır stok riskiyle sadece tasarla.</p>
+          <div class="ecom-meta-row">
+            <span>Sermaye: <strong>Sıfır Stok Riski</strong></span>
+            <span>Entegrasyon: <strong>Shopify / Etsy</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://www.printful.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Printful'ı İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="white-card ecom-card">
+          <div class="ecom-badge">TOPLULUK & SAAS</div>
+          <div class="ecom-icon"><i class="fa-solid fa-users-line"></i></div>
+          <h3>Whop ile VIP Üyelik & Kurs</h3>
+          <p>Yazılım botları, trade sinyalleri, VIP Discord toplulukları veya finans eğitimleri için tekrarlayan aylık abonelik geliri modeli oluştur.</p>
+          <div class="ecom-meta-row">
+            <span>Gelir Modeli: <strong>Aylık Düzenli MRR</strong></span>
+            <span>Ödeme: <strong>Anında Kredi Kartı</strong></span>
+          </div>
+          <div class="ecom-action-footer">
+            <a href="https://whop.com" target="_blank" rel="noopener noreferrer" class="btn-card-launch">
+              <span>Whop'ta Satışa Başla</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BÖLÜM 3: ÖNERİLEN ARAÇLAR & UYGULAMALAR DİZİNİ ================= -->
+  <section class="content-section bg-soft" id="onerilen-araclar">
+    <div class="section-container">
+      <div class="section-badge"><i class="fa-solid fa-layer-group"></i> PKS ARAÇ DİZİNİ</div>
+      <h2 class="section-heading">Tavsiye Edilen Tüm Finans, E-Ticaret ve AI Araçları</h2>
+      <p class="section-description">
+        Kendi finansal özgürlüğünü inşa ederken ihtiyacın olan en güvenilir, lisanslı ve dünya çapında kabul görmüş 20 platform. Tıklayarak doğrudan sitelerine gidebilirsin:
+      </p>
+
+      <!-- Kategori Filtresi -->
+      <div class="tools-category-filter">
+        <button class="tool-filter-btn active" onclick="filterTools('all')">
+          <i class="fa-solid fa-border-all"></i> <span>Tüm Araçlar (20)</span>
+        </button>
+        <button class="tool-filter-btn" onclick="filterTools('ecom')">
+          <i class="fa-solid fa-cart-shopping"></i> <span>E-Ticaret (6)</span>
+        </button>
+        <button class="tool-filter-btn" onclick="filterTools('finance')">
+          <i class="fa-solid fa-chart-line"></i> <span>Borsa & Yatırım (5)</span>
+        </button>
+        <button class="tool-filter-btn" onclick="filterTools('payment')">
+          <i class="fa-solid fa-credit-card"></i> <span>Şirket & Banka (4)</span>
+        </button>
+        <button class="tool-filter-btn" onclick="filterTools('ai')">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Yapay Zeka & Tasarım (5)</span>
+        </button>
+      </div>
+
+      <!-- Araçlar Kartları Izgarası -->
+      <div class="tools-directory-grid">
+        
+        <!-- E-TİCARET PLATFORMLARI -->
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f4f8ec; color:#95BF47;"><i class="fa-brands fa-shopify"></i></div>
+            <span class="tool-app-tag tag-green">Lider Altyapı</span>
+          </div>
+          <h4>Shopify</h4>
+          <p>Kendi alan adınla 15 dakikada global mağaza aç. Kredi kartı tahsilatı ve sipariş yönetimi tek panelde.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.shopify.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Shopify'ı Ziyaret Et</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fff8ee; color:#FF9900;"><i class="fa-brands fa-amazon"></i></div>
+            <span class="tool-app-tag tag-gold">Global Dev</span>
+          </div>
+          <h4>Amazon Seller Central</h4>
+          <p>FBA lojistiğiyle ürünlerini ABD ve Avrupa'daki milyonlarca Prime müşterisine ulaştır.</p>
+          <div class="tool-app-launch">
+            <a href="https://sell.amazon.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Amazon Satıcı Paneli</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fef2ec; color:#F1641E;"><i class="fa-brands fa-etsy"></i></div>
+            <span class="tool-app-tag tag-purple">Tasarım & El İşi</span>
+          </div>
+          <h4>Etsy</h4>
+          <p>Dijital planlayıcılar, Canva şablonları, takı ve kişiselleştirilmiş hediyelik ürünler için 90M alıcılı pazar.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.etsy.com/sell" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Etsy Satış Portalı</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fff1fa; color:#e11d48;"><i class="fa-solid fa-file-arrow-down"></i></div>
+            <span class="tool-app-tag tag-green">0 TL Başlangıç</span>
+          </div>
+          <h4>Gumroad</h4>
+          <p>E-kitap, kod şablonu veya Notion bütçe tablolarını sıfır sermayeyle yükle, linkini paylaş ve dolar kazan.</p>
+          <div class="tool-app-launch">
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Gumroad'a Katıl</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fdeded; color:#E52E2D;"><i class="fa-solid fa-shirt"></i></div>
+            <span class="tool-app-tag tag-blue">Print on Demand</span>
+          </div>
+          <h4>Printful</h4>
+          <p>Stok tutmadan kendi tasarımın olan tişört, kupa ve kapüşonluları bas, paketle ve müşterine doğrudan kargola.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.printful.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Printful'ı İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ecom">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fff0ed; color:#FF6243;"><i class="fa-solid fa-users-viewfinder"></i></div>
+            <span class="tool-app-tag tag-gold">Topluluk & SaaS</span>
+          </div>
+          <h4>Whop</h4>
+          <p>Ücretli Discord toplulukları, algoritmik botlar, SaaS yazılımları ve dijital üyelik satışı platformu.</p>
+          <div class="tool-app-launch">
+            <a href="https://whop.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Whop'ta Satış Yap</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- BORSA VE YATIRIM PLATFORMLARI -->
+        <div class="tool-app-card" data-category="finance">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#e6faf3; color:#00D084;"><i class="fa-solid fa-bolt"></i></div>
+            <span class="tool-app-tag tag-green">PKS Favori</span>
+          </div>
+          <h4>Midas</h4>
+          <p>1 Dolarla bile Apple, Nvidia ve S&P 500 parça hisseleri al. Düşük komisyon ve SPK/SEC güvencesi.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.getmidas.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Midas'a Git</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="finance">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#eef3ff; color:#2962FF;"><i class="fa-solid fa-chart-candlestick"></i></div>
+            <span class="tool-app-tag tag-blue">Teknik Analiz</span>
+          </div>
+          <h4>TradingView</h4>
+          <p>Dünyanın en gelişmiş grafik ve finans platformu. İndikatörler, canlı borsa verisi ve hacim analizi.</p>
+          <div class="tool-app-launch">
+            <a href="https://tr.tradingview.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Canlı Grafikleri Aç</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="finance">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#eff6ff; color:#3B82F6;"><i class="fa-solid fa-table-list"></i></div>
+            <span class="tool-app-tag tag-gold">BIST Bilanço</span>
+          </div>
+          <h4>Fintables</h4>
+          <p>Borsa İstanbul şirketlerinin çeyreklik karları, borçluluk rasyoları ve F/K çarpanlarını filtrele.</p>
+          <div class="tool-app-launch">
+            <a href="https://fintables.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Fintables'ı İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="finance">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f5eef8; color:#7B1FA2;"><i class="fa-solid fa-newspaper"></i></div>
+            <span class="tool-app-tag tag-purple">Piyasa Haberi</span>
+          </div>
+          <h4>Yahoo Finance</h4>
+          <p>ABD piyasa haberleri, Wall Street analist tahminleri, bilançolar ve küresel ekonomik takvim.</p>
+          <div class="tool-app-launch">
+            <a href="https://finance.yahoo.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Yahoo Finance'e Git</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="finance">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fef9eb; color:#d97706;"><i class="fa-solid fa-coins"></i></div>
+            <span class="tool-app-tag tag-gold">Kripto & Stabil</span>
+          </div>
+          <h4>Binance TR</h4>
+          <p>TL yatırıp çekme, Bitcoin ve dolar endeksli stabil varlıklarla (USDT) portföy çeşitlendirme.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.trbinance.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Binance TR'ye Git</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- BANKACILIK, ŞİRKET VE ÖDEME ALTYAPILARI -->
+        <div class="tool-app-card" data-category="payment">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f0fad6; color:#163300;"><i class="fa-solid fa-money-bill-transfer"></i></div>
+            <span class="tool-app-tag tag-green">Çoklu Döviz</span>
+          </div>
+          <h4>Wise (TransferWise)</h4>
+          <p>ABD, İngiltere ve Avrupa'da yerel banka IBAN'ı aç. Sıfıra yakın komisyonla döviz transferi yap.</p>
+          <div class="tool-app-launch">
+            <a href="https://wise.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Wise Hesabı Aç</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="payment">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f0efff; color:#635BFF;"><i class="fa-brands fa-stripe"></i></div>
+            <span class="tool-app-tag tag-purple">Kart Tahsilatı</span>
+          </div>
+          <h4>Stripe</h4>
+          <p>Dünya çapında kredi kartı ile ödeme alabileceğin en güvenli ve gelişmiş sanal POS altyapısı.</p>
+          <div class="tool-app-launch">
+            <a href="https://stripe.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Stripe'ı İncele</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="payment">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fff0eb; color:#FF4800;"><i class="fa-solid fa-wallet"></i></div>
+            <span class="tool-app-tag tag-gold">Global Ödeme</span>
+          </div>
+          <h4>Payoneer</h4>
+          <p>Amazon, Upwork, Fiverr ve Etsy gelirlerini doğrudan Türkiye'deki banka hesabına çek.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.payoneer.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Payoneer'e Katıl</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="payment">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f1f5f9; color:#0f172a;"><i class="fa-solid fa-landmark-flag"></i></div>
+            <span class="tool-app-tag tag-blue">ABD'de Şirket</span>
+          </div>
+          <h4>Firstbase.io</h4>
+          <p>Türkiye'den ayrılmadan ABD (Delaware/Wyoming) eyaletlerinde resmi LLC şirketi ve EIN vergi numarası al.</p>
+          <div class="tool-app-launch">
+            <a href="https://firstbase.io" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>ABD Şirketi Kur</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- YAPAY ZEKA VE ÜRETKENLİK ARAÇLARI -->
+        <div class="tool-app-card" data-category="ai">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#e6f9fa; color:#00C4CC;"><i class="fa-solid fa-palette"></i></div>
+            <span class="tool-app-tag tag-blue">Tasarım Sihirbazı</span>
+          </div>
+          <h4>Canva</h4>
+          <p>Sosyal medya reklamları, e-kitap kapakları ve dijital ürün şablonlarını dakikalar içinde profesyonelce tasarla.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.canva.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Canva'yı Aç</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ai">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#e7f7f3; color:#10A37F;"><i class="fa-solid fa-robot"></i></div>
+            <span class="tool-app-tag tag-green">AI Asistan</span>
+          </div>
+          <h4>ChatGPT</h4>
+          <p>E-ticaret ürün açıklamaları, yüksek dönüşümlü reklam metinleri ve müşteri e-postalarını yapay zekaya yazdır.</p>
+          <div class="tool-app-launch">
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>ChatGPT'yi Başlat</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ai">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f1f5f9; color:#000000;"><i class="fa-solid fa-video"></i></div>
+            <span class="tool-app-tag tag-gold">Viral Video</span>
+          </div>
+          <h4>CapCut</h4>
+          <p>TikTok, Reels ve YouTube Shorts için e-ticaret ürün videoları ve kurgularını kolayca üret.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.capcut.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>CapCut'a Git</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ai">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#f8fafc; color:#0f172a;"><i class="fa-solid fa-wand-sparkles"></i></div>
+            <span class="tool-app-tag tag-purple">Görsel Üretimi</span>
+          </div>
+          <h4>Midjourney</h4>
+          <p>Print-on-demand ürünler, posterler ve marka kimliği için fotogerçekçi görseller ve illüstrasyonlar üret.</p>
+          <div class="tool-app-launch">
+            <a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Midjourney'i Keşfet</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="tool-app-card" data-category="ai">
+          <div class="tool-app-header">
+            <div class="tool-app-icon" style="background:#fef2e8; color:#F27A1A;"><i class="fa-solid fa-store"></i></div>
+            <span class="tool-app-tag tag-gold">Yerel Pazaryeri</span>
+          </div>
+          <h4>Trendyol Satıcı Paneli</h4>
+          <p>Türkiye'nin en popüler e-ticaret platformunda mağazanı aç, yerel müşterilere 24 saatte hızlı satış yap.</p>
+          <div class="tool-app-launch">
+            <a href="https://partner.trendyol.com" target="_blank" rel="noopener noreferrer" class="btn-tool-visit">
+              <span>Trendyol Partner'a Git</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BÖLÜM 4: PKS 6 ALTIN FİNANS TAVSİYESİ ================= -->
+  <section class="content-section" id="tavsiyeler">
+    <div class="section-container">
+      <div class="section-badge"><i class="fa-solid fa-gem"></i> STRATEJİK İLKELER</div>
+      <h2 class="section-heading">PKS 6 Altın Finans ve Zenginleşme Tavsiyesi</h2>
+      <p class="section-description">
+        Midas portföyü yönetirken ya da e-ticaret mağazanı büyütürken seni hata yapmaktan koruyacak ve servetini 10 katına çıkaracak denenmiş kurallar:
+      </p>
+
+      <div class="tavsiye-grid">
+        
+        <div class="tavsiye-card gold">
+          <div class="tavsiye-num">01</div>
+          <h3>50/30/20 Portföy Bölüşümü Kuralı</h3>
+          <p>Maaş ya da e-ticaret kârın eline geçtiğinde: %50 temel yaşam masraflarına, %30 kişisel gelişime ve eğlenceye ayrılmalı. Kalan <strong>%20 asla dokunulmadan doğrudan Midas</strong> ile S&P 500 ve temettü fonlarına aktarılmalıdır.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>PKS Notu: Zenginler kalanı biriktirmez; önce birikimi ayırıp kalanı harcar!</span>
+          </div>
+        </div>
+
+        <div class="tavsiye-card green">
+          <div class="tavsiye-num">02</div>
+          <h3>Dolar ve Euro Kazanç Kalkanı</h3>
+          <p>Türkiye'de TL ile harcayıp dünyaya Shopify, Amazon veya Etsy üzerinden Dolar/Euro satmak tarihin en büyük arbitraj avantajıdır. Gelirinizi döviz cinsinden kazanmak enflasyonu sizin lehinize çevirir.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>PKS Notu: Günde $50 kazanmak, yerel para biriminde aylık maaşı ikiye katlar.</span>
+          </div>
+        </div>
+
+        <div class="tavsiye-card blue">
+          <div class="tavsiye-num">03</div>
+          <h3>Temettü Kartopu Etkisi (DRIP Metodu)</h3>
+          <p>Hisselerinden hesabına yatan temettü paralarını asla kahveye veya giyime harcama. Gelen her 100 Dolar temettü ile anında yeniden aynı hisseden al. 5 yıl sonra temettü kendi kendine yeni hisseler doğuracaktır.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-snowflake"></i>
+            <span>PKS Notu: Albert Einstein'ın dediği gibi: Bileşik getiri dünyanın 8. harikasıdır.</span>
+          </div>
+        </div>
+
+        <div class="tavsiye-card">
+          <div class="tavsiye-num">04</div>
+          <h3>6 Aylık Çelik Zırh (Acil Durum Kasası)</h3>
+          <p>Borsada ya da e-ticarette büyük riskler almadan önce en az 6 aylık kira, fatura ve gıda masrafını likit faiz veya para piyasası fonunda hazır tut. Bu kasa seni zor günlerde hisselerini zararına satmaktan korur.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-vault"></i>
+            <span>PKS Notu: Acil durum fonu kriz anlarında en sakin kalmanı sağlayan kalkandır.</span>
+          </div>
+        </div>
+
+        <div class="tavsiye-card gold">
+          <div class="tavsiye-num">05</div>
+          <h3>Sıfır Sermaye Merdiven Stratejisi</h3>
+          <p>Paran yoksa doğrudan borçla e-ticarete girme! Adım 1: Notion şablonu veya freelance beceriyle $500 sermaye yap. Adım 2: Bu $500 ile Shopify mağazanı fonla. Adım 3: E-ticaret kârını çekip Midas'ta Amerikan hisselerine bağla.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-stairs"></i>
+            <span>PKS Notu: Kendi kendini finanse eden sistem asla batmaz!</span>
+          </div>
+        </div>
+
+        <div class="tavsiye-card green">
+          <div class="tavsiye-num">06</div>
+          <h3>Duyguları Sıfırlama: Kırmızı Günler İndirimdir</h3>
+          <p>Piyasa düştüğünde ve herkes panikle satarken zenginler alışveriş yapar. Apple ya da S&P 500 %15 düştüğünde şirket batmadı, sadece hisseler indirime girdi. Sakin kal, DCA ile düzenli alıma devam et.</p>
+          <div class="tavsiye-keynote">
+            <i class="fa-solid fa-brain"></i>
+            <span>PKS Notu: Borsada sabırsızların parası, sabırlı olanların cebine akar.</span>
           </div>
         </div>
 
@@ -439,18 +952,21 @@
           <a href="#yatirim">Midas Rehberi</a>
           <a href="#yatirim">S&P 500 Fonları</a>
           <a href="#yatirim">Temettü Emekliliği</a>
+          <a href="#onerilen-araclar">TradingView & Fintables</a>
         </div>
         <div class="f-col">
           <h5>E-Ticaret</h5>
-          <a href="#eticaret">Shopify Mağazası</a>
-          <a href="#eticaret">Amazon FBA</a>
-          <a href="#eticaret">Dijital Ürünler</a>
+          <a href="#eticaret">Shopify & Amazon</a>
+          <a href="#eticaret">Etsy & Gumroad</a>
+          <a href="#eticaret">Printful & Whop</a>
+          <a href="#onerilen-araclar">Tüm E-Ticaret Araçları</a>
         </div>
         <div class="f-col">
-          <h5>İletişim & PKS</h5>
-          <a href="#iletisim">Discord: 0nlyany_</a>
+          <h5>PKS Kılavuzları</h5>
+          <a href="#tavsiyeler">6 Altın Tavsiye</a>
+          <a href="#onerilen-araclar">20+ Öneri Araç</a>
           <a href="#hesaplayici">Servet Hesaplayıcı</a>
-          <a href="#rehber-test">Gelir Modeli Testi</a>
+          <a href="#iletisim">Discord: @0nlyany_</a>
         </div>
       </div>
     </div>

@@ -60,6 +60,10 @@ function switchModelTip(type) {
     box.style.transition = 'all 0.3s ease';
     box.style.opacity = '1';
     box.style.transform = 'translateY(0)';
+
+    if (window.pksLogAction) {
+      window.pksLogAction("🧭 Gelir Modeli Seçildi", `Ziyaretçi '${tip.title}' modelini inceledi.`, 0x3b82f6);
+    }
   }, 150);
 }
 
@@ -136,6 +140,14 @@ function startMarketPulse() {
 function copyDiscordTag() {
   const username = "0nlyany_";
 
+  if (window.pksLogAction) {
+    window.pksLogAction(
+      "📋 Discord Kullanıcı Adı Kopyalandı",
+      "Kullanıcı @0nlyany_ Discord etiketini panoya kopyaladı ve arkadaş ekleme adımına geçti.",
+      0x5865f2
+    );
+  }
+
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(username).then(showToast).catch(() => fallbackCopy(username));
   } else {
@@ -174,7 +186,26 @@ function copyDiscordTag() {
   }
 }
 
-// ================= 5. BAŞLANGIÇ ÇALIŞTIRMA =================
+// ================= 5. ARAÇ DİZİNİ FİLTRELEME =================
+function filterTools(category) {
+  const btns = document.querySelectorAll('.tool-filter-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+
+  const cards = document.querySelectorAll('.tool-app-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.style.display = 'flex';
+      card.style.animation = 'fadeIn 0.3s ease';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ================= 6. BAŞLANGIÇ ÇALIŞTIRMA =================
 document.addEventListener('DOMContentLoaded', () => {
   calculateWealth();
   startMarketPulse();
