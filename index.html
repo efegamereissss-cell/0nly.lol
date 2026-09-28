@@ -8,7 +8,7 @@
   <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,12 +46,19 @@
       <nav class="nav-links">
         <a href="#yatirim" class="nav-link">Borsa & Midas</a>
         <a href="#eticaret" class="nav-link">E-Ticaret</a>
-        <a href="#rehber-test" class="nav-link">Sana Uygun Model?</a>
-        <a href="#hesaplayici" class="nav-link">Servet Hesaplayıcı</a>
-        <a href="#yolharitasi" class="nav-link">Yol Haritası</a>
+        <a href="#rehber-test" class="nav-link">Model Seçici</a>
+        <a href="#hesaplayici" class="nav-link">Hesaplayıcı</a>
+        <a href="#iletisim" class="nav-link">İletişim</a>
       </nav>
 
       <div class="nav-actions">
+        <!-- Discord Hızlı Arkadaş Ekleme Kapsülü -->
+        <button class="btn-discord-capsule" onclick="copyDiscordTag()" title="Tıkla ve Discord Kullanıcı Adımı Kopyala">
+          <i class="fa-brands fa-discord discord-color-icon"></i>
+          <span class="discord-tag-text">0nlyany_</span>
+          <span class="copy-badge"><i class="fa-solid fa-copy"></i></span>
+        </button>
+
         <a href="#hesaplayici" class="btn-pks-primary">
           <i class="fa-solid fa-calculator"></i>
           <span>Getiri Hesapla</span>
@@ -60,7 +67,7 @@
     </div>
   </header>
 
-  <!-- ================= HERO BÖLÜMÜ (VİDEO ARKA PLANLI & ŞIKLAŞTIRILMIŞ) ================= -->
+  <!-- ================= HERO BÖLÜMÜ (VİDEO ARKA PLANLI) ================= -->
   <section class="video-hero-section">
     <!-- Özel MP4 Arka Plan Videosu -->
     <video class="hero-video-bg" autoplay muted loop playsinline>
@@ -94,10 +101,10 @@
           <i class="fa-solid fa-wand-magic-sparkles"></i>
           <span>Sana Uygun Modeli Bul</span>
         </a>
-        <a href="#eticaret" class="btn-hero-outline">
-          <i class="fa-solid fa-store"></i>
-          <span>E-Ticaret Rehberi</span>
-        </a>
+        <button class="btn-hero-discord" onclick="copyDiscordTag()">
+          <i class="fa-brands fa-discord"></i>
+          <span>Discord: 0nlyany_</span>
+        </button>
       </div>
 
       <!-- Hero Altı Lüks Metrikler -->
@@ -120,7 +127,7 @@
     </div>
   </section>
 
-  <!-- ================= İNTERAKTİF PKS GELİR MODELİ SEÇİCİ (YENİ ŞIK ÖZELLİK) ================= -->
+  <!-- ================= İNTERAKTİF PKS GELİR MODELİ SEÇİCİ ================= -->
   <section class="content-section" id="rehber-test">
     <div class="section-container">
       <div class="white-card selector-card">
@@ -146,10 +153,10 @@
         </div>
 
         <div class="model-result-display" id="modelResultBox">
-          <div class="result-badge-tag" id="tipBadge">PKS TAVSİYESİ: DİJİTAL ÜRÜN VE FREELANCE</div>
+          <div class="result-badge-tag" id="tipBadge">PKS TAVSİYESİ: DİJİTAL ÜRÜN VE FREELANCE (0 TL SERMAYE)</div>
           <h3 id="tipTitle">Dijital Ürün Satışı & Yüksek Gelirli Beceriler</h3>
           <p id="tipDesc">
-            Cebinde hiç sermaye yoksa en hızlı nakit akışı dijital varlık satmaktır. Notion şablonları, e-kitaplar veya Canva tasarımları üretip Gumroad ve Etsy üzerinde satabilir; video editörlüğü veya yazılım becerisiyle Upwork'te saatlik $25-50 kazanabilirsin.
+            Cebinde hiç sermaye yoksa en hızlı nakit akışı dijital varlık satmaktır. Notion şablonları, bütçe tabloları veya Canva tasarımları üretip Gumroad ve Etsy üzerinde satabilir; video editörlüğü veya yazılım becerisiyle Upwork'te saatlik $25-50 kazanabilirsin.
           </p>
           <div class="tip-action-row">
             <a href="#eticaret" class="tip-link-btn">Adım Adım Nasıl Yapılır? →</a>
@@ -372,47 +379,37 @@
     </div>
   </section>
 
-  <!-- ================= BÖLÜM 4: ADIM ADIM YOL HARİTASI ================= -->
-  <section class="content-section" id="yolharitasi">
+  <!-- ================= BÖLÜM 4: DİSCORD & İLETİŞİM ALANI ================= -->
+  <section class="content-section" id="iletisim">
     <div class="section-container">
-      <div class="section-badge"><i class="fa-solid fa-chess-knight"></i> STRATEJİ</div>
-      <h2 class="section-heading">PKS Finansal Özgürlük Yol Haritası</h2>
-      <p class="section-description">Bugün başlayıp adım adım finansal gücünü büyütebileceğin 4 adımlı net plan:</p>
-
-      <div class="roadmap-timeline">
-        
-        <div class="roadmap-step">
-          <div class="step-marker">01</div>
-          <div class="step-content white-card">
-            <h4>Acil Durum Fonu & Borçları Kapat</h4>
-            <p>Yatırıma başlamadan önce en az 3 aylık temel giderini likit bir hesapta tut. Yüksek faizli gereksiz borçlarını kapat.</p>
+      <div class="white-card discord-feature-box">
+        <div class="discord-left-side">
+          <div class="discord-big-avatar">
+            <i class="fa-brands fa-discord"></i>
+            <span class="discord-online-dot" title="Çevrimiçi & Mesajlara Açık"></span>
+          </div>
+          <div class="discord-text-meta">
+            <div class="discord-badge-pill">BİREBİR İLETİŞİM & SORULARINIZ</div>
+            <h3>Discord Üzerinden Bana Ulaş</h3>
+            <p>E-ticaret modelleri, Midas yatırım stratejileri veya iş birliği fırsatları için Discord'dan doğrudan arkadaş ekleyip mesaj atabilirsin.</p>
+            <div class="discord-username-display" onclick="copyDiscordTag()" title="Kullanıcı Adını Kopyalamak İçin Tıkla">
+              <span class="at-sign">@</span>
+              <strong id="discordHandleText">0nlyany_</strong>
+              <span class="copy-click-hint"><i class="fa-solid fa-copy"></i> Kopyala</span>
+            </div>
           </div>
         </div>
 
-        <div class="roadmap-step">
-          <div class="step-marker">02</div>
-          <div class="step-content white-card">
-            <h4>Midas Hesabı Aç & Düzenli Alıma Başla</h4>
-            <p>Her ay kazancının en az %15'ini Midas üzerinden S&P 500 fonlarına veya temettü hisselerine ayır. Piyasayı tahmin etmeden disiplinle biriktir.</p>
-          </div>
+        <div class="discord-right-side">
+          <button class="btn-discord-action copy" onclick="copyDiscordTag()">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Arkadaş Ekle (0nlyany_)</span>
+          </button>
+          <a href="https://discord.com/app" target="_blank" class="btn-discord-action open">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Discord'u Başlat</span>
+          </a>
         </div>
-
-        <div class="roadmap-step">
-          <div class="step-marker">03</div>
-          <div class="step-content white-card">
-            <h4>İkinci Bir Dijital Gelir Kaynağı Kur (E-Ticaret)</h4>
-            <p>Maaşınla yetinme. Akşamları ve hafta sonları Shopify mağazası, dijital ürünler veya freelance hizmetlerle dolar kazanmaya başla.</p>
-          </div>
-        </div>
-
-        <div class="roadmap-step">
-          <div class="step-marker">04</div>
-          <div class="step-content white-card">
-            <h4>Karını Tekrar Portföyüne Aktar (Kartopu Etkisi)</h4>
-            <p>E-ticaretten kazandığın ek geliri lükse değil, borsadaki portföyüne aktar. Gelir getiren varlıkların senin için çalışmaya başlasın.</p>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -431,6 +428,9 @@
           </div>
         </a>
         <p class="footer-tagline">Finansal okuryazarlık, modern e-ticaret modelleri, Midas yatırımları ve servet birikimi sanatı.</p>
+        <div class="footer-discord-chip" onclick="copyDiscordTag()">
+          <i class="fa-brands fa-discord"></i> <span>Discord: @0nlyany_</span>
+        </div>
       </div>
 
       <div class="footer-links-group">
@@ -447,10 +447,10 @@
           <a href="#eticaret">Dijital Ürünler</a>
         </div>
         <div class="f-col">
-          <h5>PKS Araçları</h5>
+          <h5>İletişim & PKS</h5>
+          <a href="#iletisim">Discord: 0nlyany_</a>
           <a href="#hesaplayici">Servet Hesaplayıcı</a>
           <a href="#rehber-test">Gelir Modeli Testi</a>
-          <a href="#yolharitasi">Yol Haritası</a>
         </div>
       </div>
     </div>
@@ -458,6 +458,15 @@
       <p>© 2026 Parakazanmasanati (PKS Finansal). Tüm hakları saklıdır. Bu sitedeki içerikler eğitim amaçlıdır, yatırım tavsiyesi değildir.</p>
     </div>
   </footer>
+
+  <!-- Apple / Modern Toast Bildirimi -->
+  <div class="pks-toast" id="pksToast">
+    <div class="toast-icon-side"><i class="fa-brands fa-discord"></i></div>
+    <div class="toast-body-side">
+      <h5 id="toastTitle">Discord Kopyalandı</h5>
+      <p id="toastMsg">0nlyany_ kullanıcı adı panoya kopyalandı!</p>
+    </div>
+  </div>
 
   <!-- Script Dosyası -->
   <script src="app.js"></script>

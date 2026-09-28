@@ -1,6 +1,7 @@
 /* =========================================================
    PARAKAZANMASANATI | PKS FİNANSAL
    Ultra Lüks Beyaz Minimalist Tasarım, Altın & Zümrüt Vurguları
+   Discord Entegrasyonu (@0nlyany_)
    ========================================================= */
 
 :root {
@@ -26,13 +27,14 @@
   --accent-blue-light: #eff6ff;
   --accent-purple: #7c3aed;
   --accent-purple-light: #f5f3ff;
+  --discord-blurple: #5865F2;
+  --discord-light: #eef2ff;
 
   --shadow-card: 0 4px 25px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
   --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
 
   --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
-  --font-serif: 'Cinzel', serif;
 
   --trans: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -178,7 +180,7 @@ body.light-mode {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 24px;
 }
 
 .nav-link {
@@ -190,6 +192,43 @@ body.light-mode {
 }
 .nav-link:hover {
   color: var(--text-primary);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Discord Kapsül Butonu (Navbar) */
+.btn-discord-capsule {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--trans);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.btn-discord-capsule:hover {
+  border-color: var(--discord-blurple);
+  color: var(--discord-blurple);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(88, 101, 242, 0.15);
+}
+.discord-color-icon {
+  color: var(--discord-blurple);
+  font-size: 15px;
+}
+.copy-badge {
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .btn-pks-primary {
@@ -233,7 +272,6 @@ body.light-mode {
   z-index: 1;
 }
 
-/* LÜKS BEYAZ GRADYAN & CAM OVERLAY */
 .hero-white-overlay {
   position: absolute;
   inset: 0;
@@ -352,24 +390,27 @@ body.light-mode {
   transform: translateY(-2px);
 }
 
-.btn-hero-outline {
+.btn-hero-discord {
   background: #ffffff;
-  color: #0f172a;
-  border: 1px solid var(--border-light);
-  text-decoration: none;
+  color: var(--discord-blurple);
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  font-family: var(--font-main);
   font-size: 14px;
   font-weight: 700;
-  padding: 13px 26px;
+  padding: 13px 24px;
   border-radius: 11px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
   transition: var(--trans);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 15px rgba(88, 101, 242, 0.08);
 }
-.btn-hero-outline:hover {
-  border-color: #0f172a;
+.btn-hero-discord:hover {
+  background: var(--discord-blurple);
+  color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(88, 101, 242, 0.25);
 }
 
 /* Metric Bar */
@@ -913,36 +954,219 @@ input[type="range"]::-webkit-slider-thumb:hover {
   margin-top: 2px;
 }
 
-/* ================= YOL HARİTASI ================= */
-.roadmap-timeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+/* ================= DİSCORD & İLETİŞİM ALANI ================= */
+.discord-feature-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border: 1px solid rgba(88, 101, 242, 0.2);
+  padding: 38px 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  box-shadow: 0 10px 35px rgba(88, 101, 242, 0.06);
 }
 
-.roadmap-step {
+.discord-left-side {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: 640px;
+}
+
+.discord-big-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: var(--discord-blurple);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(88, 101, 242, 0.35);
+  flex-shrink: 0;
+}
+
+.discord-online-dot {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.discord-text-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.discord-badge-pill {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--discord-blurple);
+  text-transform: uppercase;
+}
+
+.discord-text-meta h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.discord-text-meta p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.discord-username-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  padding: 6px 14px;
+  border-radius: 10px;
+  width: fit-content;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: var(--trans);
+}
+.discord-username-display:hover {
+  background: var(--discord-light);
+  border-color: var(--discord-blurple);
+  transform: translateY(-1px);
+}
+.discord-username-display .at-sign {
+  color: var(--discord-blurple);
+  font-weight: 800;
+}
+.discord-username-display strong {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: #0f172a;
+}
+.copy-click-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+
+.discord-right-side {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.step-marker {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 800;
-  color: #cbd5e1;
+.btn-discord-action {
+  font-family: var(--font-main);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--trans);
+}
+.btn-discord-action.copy {
+  background: var(--discord-blurple);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 18px rgba(88, 101, 242, 0.3);
+}
+.btn-discord-action.copy:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(88, 101, 242, 0.4);
 }
 
-.step-content h4 {
-  font-size: 16px;
-  font-weight: 700;
+.btn-discord-action.open {
+  background: #ffffff;
   color: #0f172a;
-  margin-bottom: 8px;
+  border: 1px solid var(--border-light);
 }
-.step-content p {
+.btn-discord-action.open:hover {
+  border-color: #0f172a;
+  transform: translateY(-2px);
+}
+
+.footer-discord-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--discord-light);
+  color: var(--discord-blurple);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-top: 14px;
+  cursor: pointer;
+  transition: var(--trans);
+}
+.footer-discord-chip:hover {
+  background: var(--discord-blurple);
+  color: #fff;
+}
+
+/* ================= TOAST BİLDİRİMİ ================= */
+.pks-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #0f172a;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transform: translateY(120px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pks-toast.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.toast-icon-side {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--discord-blurple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.toast-body-side h5 {
   font-size: 13.5px;
-  color: var(--text-secondary);
-  line-height: 1.55;
+  font-weight: 700;
+  color: #fff;
+}
+.toast-body-side p {
+  font-size: 12px;
+  color: #94a3b8;
 }
 
 /* ================= FOOTER ================= */
@@ -1024,5 +1248,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
   }
   .metric-sep {
     display: none;
+  }
+  .discord-feature-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .discord-left-side {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

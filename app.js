@@ -132,7 +132,49 @@ function startMarketPulse() {
   }, 4000);
 }
 
-// ================= 4. BAŞLANGIÇ ÇALIŞTIRMA =================
+// ================= 4. DİSCORD KULLANICI ADI KOPYALAYICI =================
+function copyDiscordTag() {
+  const username = "0nlyany_";
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(username).then(showToast).catch(() => fallbackCopy(username));
+  } else {
+    fallbackCopy(username);
+  }
+
+  function fallbackCopy(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Kopyalama hatası: ', err);
+    }
+    textArea.remove();
+    showToast();
+  }
+
+  function showToast() {
+    const toast = document.getElementById("pksToast");
+    if (!toast) return;
+
+    toast.classList.add("active");
+    if (window._toastTimeout) {
+      clearTimeout(window._toastTimeout);
+    }
+    window._toastTimeout = setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3200);
+  }
+}
+
+// ================= 5. BAŞLANGIÇ ÇALIŞTIRMA =================
 document.addEventListener('DOMContentLoaded', () => {
   calculateWealth();
   startMarketPulse();
@@ -143,3 +185,4 @@ document.addEventListener('DOMContentLoaded', () => {
     video.play().catch(() => {});
   }
 });
+
