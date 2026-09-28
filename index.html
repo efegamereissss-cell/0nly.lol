@@ -16,12 +16,16 @@
   <!-- Ana Stil Dosyası -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-obsidian" id="appBody">
+<body class="theme-void-nebula" id="appBody">
+
+  <!-- ================= FARE İMLECİ IŞIK SPOTLIGHTI ================= -->
+  <div class="cursor-spotlight" id="cursorSpotlight"></div>
 
   <!-- Arka Plan Dinamik Görsel Ambiyans -->
   <div class="ambient-world">
     <canvas id="ambientCanvas"></canvas>
     <div class="cyber-vignette"></div>
+    <div class="scanlines-fx" id="scanlinesFx"></div>
     <div class="grid-subtle"></div>
   </div>
 
@@ -35,7 +39,7 @@
 
       <nav class="nav-menu">
         <button class="nav-link" id="navHomeBtn" onclick="navigateTo('#/')">
-          <i class="fa-solid fa-compass"></i> <span>Keşfet</span>
+          <i class="fa-solid fa-compass"></i> <span>Ana Sayfa</span>
         </button>
         <button class="nav-link" id="navCreateBtn" onclick="navigateTo('#/profilecreate')">
           <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Profil Oluştur</span>
@@ -47,9 +51,12 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSoundFx()" title="Arayüz Ses Efektleri">
+          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+        </button>
         <button class="btn-create-highlight" onclick="navigateTo('#/profilecreate')">
           <i class="fa-solid fa-plus"></i>
-          <span>Kendi Profilini Yarat</span>
+          <span>Kendi Alanını Yarat</span>
         </button>
       </div>
     </div>
@@ -62,24 +69,20 @@
     <div class="home-hero-container">
       <div class="hero-badge">
         <span class="pulse-point"></span>
-        <span>SANALIN EN ELİT KİMLİK PLATFORMU</span>
+        <span>SANALIN EN ELİT KİŞİSEL ALANI</span>
       </div>
       <h1 class="hero-title">
         KENDİNE AİT BİR <br>
-        <span class="gradient-text">0NLY.LOL ALANI</span> YARAT
+        <span class="gradient-text">0NLY.LOL ALANI</span> OLUŞTUR
       </h1>
       <p class="hero-subtitle">
-        Sıradan biolinkleri unut. Oyuncular, roleplay liderleri, geliştiriciler ve sanalın en havalı isimleri için sıfırdan tasarlanmış VIP profil deneyimi.
+        Hiçbir hazır şablon, sıradan profil yok. Kendi fotoğrafını, özel bağlantılarını, Discord durumunu ve havalı sanalcı rozetlerini sıfırdan kendin tasarla.
       </p>
 
       <div class="hero-cta-group">
         <button class="btn-primary-glow" onclick="navigateTo('#/profilecreate')">
           <i class="fa-solid fa-bolt"></i>
-          <span>Hemen Profil Oluştur (/profilecreate)</span>
-        </button>
-        <button class="btn-secondary-glass" onclick="loadFeaturedProfile('jason')">
-          <i class="fa-solid fa-eye"></i>
-          <span>Örnek VIP Profili İncele</span>
+          <span>Profilini Sıfırdan Oluştur (/profilecreate)</span>
         </button>
       </div>
 
@@ -87,17 +90,17 @@
       <div class="hero-stats-bar">
         <div class="stat-box">
           <span class="stat-number">100%</span>
-          <span class="stat-desc">Sıfırdan Özel Tasarım</span>
+          <span class="stat-desc">Kişiye Özel Tasarım</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <span class="stat-number">0.0 ms</span>
-          <span class="stat-desc">Ultra Hızlı & Reklamsız</span>
+          <span class="stat-number">3D Glare</span>
+          <span class="stat-desc">İmleç Takipli Işık</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
           <span class="stat-number">VIP</span>
-          <span class="stat-desc">Özel Rozetler & 3D Tilt</span>
+          <span class="stat-desc">Sınırsız Özel Link</span>
         </div>
       </div>
     </div>
@@ -112,20 +115,20 @@
         
         <div class="studio-header">
           <div class="studio-badge-row">
-            <span class="studio-tag"><i class="fa-solid fa-sliders"></i> STÜDYO SUITE</span>
-            <span class="url-preview-pill">0nly.lol/<strong id="liveUrlPreview">kullanici</strong></span>
+            <span class="studio-tag"><i class="fa-solid fa-sliders"></i> KİŞİSEL STÜDYO</span>
+            <span class="url-preview-pill">0nly.lol/<strong id="liveUrlPreview">...</strong></span>
           </div>
           <h2>VIP Profil Mimarı</h2>
-          <p>Her detayı sıfırdan sen belirle. Canlı önizleme sağda gerçek zamanlı güncellenir.</p>
+          <p>Her alan boştur, profilini sıfırdan tamamen sana özel inşa et. Canlı önizleme sağda gerçek zamanlı oluşur.</p>
         </div>
 
         <!-- Akordeon / Sekmeli Düzenleyici -->
         <div class="editor-tabs-bar">
           <button class="editor-tab-btn active" onclick="switchEditorTab('tab-identity')">
-            <i class="fa-regular fa-id-badge"></i> <span>Kimlik</span>
+            <i class="fa-regular fa-id-badge"></i> <span>Kimlik & Fotoğraf</span>
           </button>
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-appearance')">
-            <i class="fa-solid fa-palette"></i> <span>Görünüm & Tema</span>
+            <i class="fa-solid fa-palette"></i> <span>Temalar & Efektler</span>
           </button>
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-badges')">
             <i class="fa-solid fa-award"></i> <span>Rozetler</span>
@@ -133,122 +136,138 @@
           <button class="editor-tab-btn" onclick="switchEditorTab('tab-discord')">
             <i class="fa-brands fa-discord"></i> <span>Discord & Aktivite</span>
           </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-socials')">
-            <i class="fa-solid fa-share-nodes"></i> <span>Sosyal Linkler</span>
+          <button class="editor-tab-btn" onclick="switchEditorTab('tab-links')">
+            <i class="fa-solid fa-link"></i> <span>Özel Linkler</span>
           </button>
         </div>
 
-        <!-- SEKME 1: KİMLİK & BİYOGRAFİ -->
+        <!-- SEKME 1: KİMLİK, FOTOĞRAF & BİYOGRAFİ -->
         <div class="editor-content-tab active" id="tab-identity">
           <div class="form-grid">
             <div class="input-block">
-              <label>Özel Profil Linki (Handle):</label>
+              <label>Özel Profil Linkin (Handle):</label>
               <div class="prefix-input">
                 <span class="input-prefix">0nly.lol/</span>
                 <input type="text" id="inputHandle" placeholder="kullanici_adin" oninput="updateLivePreview()" maxlength="24">
               </div>
-              <small>Profilinin benzersiz URL'si olacaktır.</small>
+              <small>0nly.lol/ üzerinden profilinin açılacağı isim.</small>
             </div>
 
             <div class="input-block">
-              <label>Görünen İsim (Display Name):</label>
-              <input type="text" id="inputDisplayName" placeholder="Örn: Jason, Tony Montana, Vercetti" oninput="updateLivePreview()">
+              <label>Görünen Adın (Display Name):</label>
+              <input type="text" id="inputDisplayName" placeholder="Profilinde görünecek ismin..." oninput="updateLivePreview()">
             </div>
 
             <div class="input-block">
-              <label>Zamirler / Ünvan (Pronouns):</label>
-              <input type="text" id="inputPronouns" placeholder="he/him, they/them, sanalcı" oninput="updateLivePreview()">
+              <label>Ünvan / Zamirler (İsteğe Bağlı):</label>
+              <input type="text" id="inputPronouns" placeholder="Örn: Sanalcı, Developer, he/him..." oninput="updateLivePreview()">
             </div>
 
             <div class="input-block">
-              <label>Konum (Location):</label>
-              <input type="text" id="inputLocation" placeholder="Miami, Starfish Island, Tokyo" oninput="updateLivePreview()">
+              <label>Konum / Şehir (İsteğe Bağlı):</label>
+              <input type="text" id="inputLocation" placeholder="Örn: Miami, Tokyo, Cyberspace..." oninput="updateLivePreview()">
             </div>
           </div>
 
+          <!-- Profil Fotoğrafı (Dosya Yükleme veya URL) -->
           <div class="input-block full-width">
-            <label>Avatar Görsel URL'si:</label>
-            <div class="avatar-input-row">
-              <input type="text" id="inputAvatarUrl" placeholder="https://i.imgur.com/resim.jpg veya boş bırak hazır kullan" oninput="updateLivePreview()">
-              <button class="btn-random-avatar" onclick="generateRandomAvatar()" title="Rastgele Cool Avatar">
-                <i class="fa-solid fa-dice"></i>
-              </button>
+            <label>Profil Fotoğrafı:</label>
+            <div class="avatar-upload-control">
+              <label class="btn-file-upload" title="Bilgisayarından Fotoğraf Seç">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Bilgisayardan Fotoğraf Yükle</span>
+                <input type="file" id="avatarFileInput" accept="image/*" onchange="handleAvatarFileSelect(event)">
+              </label>
+              <span class="upload-or">veya</span>
+              <input type="text" id="inputAvatarUrl" placeholder="Fotoğraf URL'si yapıştır (https://...)" oninput="updateLivePreview()">
             </div>
+            <small>Bilgisayarından istediğin herhangi bir fotoğrafı doğrudan seçebilirsin.</small>
           </div>
 
+          <!-- Biyografi -->
           <div class="input-block full-width">
-            <label>Özel Biyografi & Açıklama:</label>
-            <textarea id="inputBio" rows="3" placeholder="Sanal dünyadaki tarzını, karakterini ya da felsefeni yansıtan söz..." oninput="updateLivePreview()"></textarea>
+            <label>Biyografi & Durum Açıklaması:</label>
+            <textarea id="inputBio" rows="3" placeholder="Profilinde sergilemek istediğin açıklama, söz ya da felsefen..." oninput="updateLivePreview()"></textarea>
           </div>
         </div>
 
         <!-- SEKME 2: GÖRÜNÜM, TEMA & ÇERÇEVELER -->
         <div class="editor-content-tab" id="tab-appearance">
-          <label class="tab-label">Renk & Atmosfer Teması:</label>
+          <label class="tab-label">Havalı VIP Renk Temaları:</label>
           <div class="theme-cards-grid">
-            <div class="theme-card active" data-theme="theme-obsidian" onclick="pickTheme('theme-obsidian')">
-              <div class="theme-preview-color color-obsidian"></div>
-              <span class="theme-name">Obsidian Black</span>
+            <div class="theme-card active" data-theme="theme-void-nebula" onclick="pickTheme('theme-void-nebula')">
+              <div class="theme-preview-color color-void"></div>
+              <span class="theme-name">Void Nebula</span>
             </div>
-            <div class="theme-card" data-theme="theme-purple" onclick="pickTheme('theme-purple')">
-              <div class="theme-preview-color color-purple"></div>
-              <span class="theme-name">Midnight Violet</span>
+            <div class="theme-card" data-theme="theme-tokyo-red" onclick="pickTheme('theme-tokyo-red')">
+              <div class="theme-preview-color color-tokyo"></div>
+              <span class="theme-name">Tokyo Cyber Red</span>
             </div>
-            <div class="theme-card" data-theme="theme-neon-pink" onclick="pickTheme('theme-neon-pink')">
-              <div class="theme-preview-color color-pink"></div>
-              <span class="theme-name">Cyber Magenta</span>
+            <div class="theme-card" data-theme="theme-phantom-emerald" onclick="pickTheme('theme-phantom-emerald')">
+              <div class="theme-preview-color color-emerald"></div>
+              <span class="theme-name">Phantom Emerald</span>
             </div>
-            <div class="theme-card" data-theme="theme-miami-cyan" onclick="pickTheme('theme-miami-cyan')">
-              <div class="theme-preview-color color-cyan"></div>
-              <span class="theme-name">Miami Cyan</span>
+            <div class="theme-card" data-theme="theme-liquid-chrome" onclick="pickTheme('theme-liquid-chrome')">
+              <div class="theme-preview-color color-chrome"></div>
+              <span class="theme-name">Liquid Chrome</span>
             </div>
-            <div class="theme-card" data-theme="theme-blood-crimson" onclick="pickTheme('theme-blood-crimson')">
-              <div class="theme-preview-color color-crimson"></div>
-              <span class="theme-name">Blood Crimson</span>
+            <div class="theme-card" data-theme="theme-midnight-amethyst" onclick="pickTheme('theme-midnight-amethyst')">
+              <div class="theme-preview-color color-amethyst"></div>
+              <span class="theme-name">Midnight Amethyst</span>
             </div>
-            <div class="theme-card" data-theme="theme-gold-vip" onclick="pickTheme('theme-gold-vip')">
-              <div class="theme-preview-color color-gold"></div>
-              <span class="theme-name">Royal Gold</span>
+            <div class="theme-card" data-theme="theme-solar-eclipse" onclick="pickTheme('theme-solar-eclipse')">
+              <div class="theme-preview-color color-solar"></div>
+              <span class="theme-name">Solar Gold</span>
             </div>
-            <div class="theme-card" data-theme="theme-matrix" onclick="pickTheme('theme-matrix')">
-              <div class="theme-preview-color color-matrix"></div>
-              <span class="theme-name">Matrix Emerald</span>
+            <div class="theme-card" data-theme="theme-abyssal-ocean" onclick="pickTheme('theme-abyssal-ocean')">
+              <div class="theme-preview-color color-abyss"></div>
+              <span class="theme-name">Abyssal Cyan</span>
             </div>
           </div>
 
-          <label class="tab-label" style="margin-top: 18px;">Avatar Çerçeve Stili:</label>
+          <label class="tab-label" style="margin-top: 18px;">Avatar Çerçeve & Efekt Stili:</label>
           <div class="ring-selector-row">
-            <button class="ring-choice-btn active" data-ring="ring-neon" onclick="pickRingStyle('ring-neon')">Neon Halo Ring</button>
-            <button class="ring-choice-btn" data-ring="ring-gold" onclick="pickRingStyle('ring-gold')">Gold Crown</button>
-            <button class="ring-choice-btn" data-ring="ring-glitch" onclick="pickRingStyle('ring-glitch')">Glitch Pulse</button>
-            <button class="ring-choice-btn" data-ring="ring-minimal" onclick="pickRingStyle('ring-minimal')">Minimalist Glass</button>
+            <button class="ring-choice-btn active" data-ring="ring-pulsing-neon" onclick="pickRingStyle('ring-pulsing-neon')">Pulsing Neon</button>
+            <button class="ring-choice-btn" data-ring="ring-gold-crown" onclick="pickRingStyle('ring-gold-crown')">Golden Luxury</button>
+            <button class="ring-choice-btn" data-ring="ring-cyber-glitch" onclick="pickRingStyle('ring-cyber-glitch')">Cyber Glitch</button>
+            <button class="ring-choice-btn" data-ring="ring-pure-glass" onclick="pickRingStyle('ring-pure-glass')">Pure Glass</button>
+            <button class="ring-choice-btn" data-ring="ring-stealth" onclick="pickRingStyle('ring-stealth')">None (Sade)</button>
           </div>
 
           <div class="toggle-control-box" style="margin-top: 20px;">
             <label class="switch-toggle">
               <input type="checkbox" id="checkVerifiedBadge" checked onchange="updateLivePreview()">
               <span class="slider"></span>
-              <span class="toggle-text">Doğrulanmış Rozet (Verified Checkmark)</span>
+              <span class="toggle-text">Doğrulanmış Rozeti (Verified Checkmark)</span>
             </label>
             <label class="switch-toggle">
               <input type="checkbox" id="check3dTilt" checked>
               <span class="slider"></span>
-              <span class="toggle-text">3D Fare Eğim Fiziği (Interactive 3D Tilt)</span>
+              <span class="toggle-text">3D Fare Eğim Fiziği & Işık Parlaması (3D Glare)</span>
+            </label>
+            <label class="switch-toggle">
+              <input type="checkbox" id="checkScanlines" checked onchange="toggleScanlinesFx()">
+              <span class="slider"></span>
+              <span class="toggle-text">CRT Retro Çizgi & Monitör Ambiyansı</span>
             </label>
           </div>
         </div>
 
         <!-- SEKME 3: ROZETLER & PRESTİJ -->
         <div class="editor-content-tab" id="tab-badges">
-          <label class="tab-label">Profilinde Sergilenecek VIP Rozetler (İstediğini Seç):</label>
+          <label class="tab-label">Profilinde Sergilemek İstediğin Rozetleri Seç:</label>
           <div class="badges-selection-grid">
             <label class="badge-checkbox">
-              <input type="checkbox" value="og" checked onchange="updateLivePreview()">
-              <div class="badge-item-view og"><i class="fa-solid fa-crown"></i> <span>OG Member</span></div>
+              <input type="checkbox" value="sanalci" checked onchange="updateLivePreview()">
+              <div class="badge-item-view sanalci"><i class="fa-solid fa-skull"></i> <span>Sanalcı Elite</span></div>
             </label>
             <label class="badge-checkbox">
               <input type="checkbox" value="vip" checked onchange="updateLivePreview()">
               <div class="badge-item-view vip"><i class="fa-solid fa-gem"></i> <span>VIP Donator</span></div>
+            </label>
+            <label class="badge-checkbox">
+              <input type="checkbox" value="og" onchange="updateLivePreview()">
+              <div class="badge-item-view og"><i class="fa-solid fa-crown"></i> <span>OG Member</span></div>
             </label>
             <label class="badge-checkbox">
               <input type="checkbox" value="verified" checked onchange="updateLivePreview()">
@@ -260,15 +279,11 @@
             </label>
             <label class="badge-checkbox">
               <input type="checkbox" value="staff" onchange="updateLivePreview()">
-              <div class="badge-item-view staff"><i class="fa-solid fa-bolt"></i> <span>Staff / Yetkili</span></div>
+              <div class="badge-item-view staff"><i class="fa-solid fa-bolt"></i> <span>Staff / Lider</span></div>
             </label>
             <label class="badge-checkbox">
               <input type="checkbox" value="booster" onchange="updateLivePreview()">
               <div class="badge-item-view booster"><i class="fa-solid fa-rocket"></i> <span>Server Booster</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="sanalci" checked onchange="updateLivePreview()">
-              <div class="badge-item-view sanalci"><i class="fa-solid fa-skull"></i> <span>Sanalcı Elite</span></div>
             </label>
           </div>
         </div>
@@ -277,81 +292,58 @@
         <div class="editor-content-tab" id="tab-discord">
           <div class="form-grid">
             <div class="input-block">
-              <label>Oynanan Oyun / Aktivite İsmi:</label>
-              <input type="text" id="inputDiscordTitle" placeholder="Örn: Multi Theft Auto: San Andreas" oninput="updateLivePreview()">
+              <label>Oynanan Oyun / Aktivite Adı (İsteğe Bağlı):</label>
+              <input type="text" id="inputDiscordTitle" placeholder="Örn: Multi Theft Auto: San Andreas, VS Code..." oninput="updateLivePreview()">
             </div>
             <div class="input-block">
-              <label>Aktivite Detay / Rol Alanı:</label>
-              <input type="text" id="inputDiscordSub" placeholder="Örn: Retro Roleplay (Miami 1986)" oninput="updateLivePreview()">
+              <label>Detay / Sunucu / Rol Durumu:</label>
+              <input type="text" id="inputDiscordSub" placeholder="Örn: Retro Roleplay (Miami 1986)..." oninput="updateLivePreview()">
             </div>
             <div class="input-block">
-              <label>Geçen Süre / Durum:</label>
-              <input type="text" id="inputDiscordTime" placeholder="Örn: 02:40:15 süredir oyunda" oninput="updateLivePreview()">
+              <label>Geçen Süre / Durum Açıklaması:</label>
+              <input type="text" id="inputDiscordTime" placeholder="Örn: 03:15:00 süredir oyunda..." oninput="updateLivePreview()">
             </div>
             <div class="input-block">
-              <label>Discord Çevrimiçi Durumu:</label>
+              <label>Çevrimiçi Durum Işığı:</label>
               <select id="selectOnlineStatus" onchange="updateLivePreview()">
-                <option value="online">Çevrimiçi (Yeşil)</option>
-                <option value="dnd">Rahatsız Etmeyin (Kırmızı)</option>
-                <option value="idle">Boşta (Sarı)</option>
+                <option value="online">Çevrimiçi (Yeşil Işık)</option>
+                <option value="dnd">Rahatsız Etmeyin (Kırmızı Işık)</option>
+                <option value="idle">Boşta (Sarı Işık)</option>
+                <option value="offline">Görünmez / Gizli</option>
               </select>
             </div>
           </div>
+          <small>Eğer oyun adını boş bırakırsan bu kutu profilde gizlenir.</small>
         </div>
 
-        <!-- SEKME 5: SOSYAL MEDYA LİNKLERİ -->
-        <div class="editor-content-tab" id="tab-socials">
-          <label class="tab-label">Profilinde Görünecek Linkler (Doldurdukların Otomatik Eklenir):</label>
-          <div class="social-input-list">
-            <div class="social-input-row">
-              <span class="social-prefix-icon discord"><i class="fa-brands fa-discord"></i></span>
-              <input type="text" id="linkDiscord" placeholder="Discord Davet Linki ya da Kullanıcı Adın" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon telegram"><i class="fa-brands fa-telegram"></i></span>
-              <input type="text" id="linkTelegram" placeholder="Telegram Linkin (t.me/kullanici)" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon steam"><i class="fa-brands fa-steam"></i></span>
-              <input type="text" id="linkSteam" placeholder="Steam Profil Linkin" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon spotify"><i class="fa-brands fa-spotify"></i></span>
-              <input type="text" id="linkSpotify" placeholder="Spotify Profil Linkin" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon instagram"><i class="fa-brands fa-instagram"></i></span>
-              <input type="text" id="linkInstagram" placeholder="Instagram Profil Linkin" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon github"><i class="fa-brands fa-github"></i></span>
-              <input type="text" id="linkGithub" placeholder="GitHub Profil Linkin" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon x-twitter"><i class="fa-brands fa-x-twitter"></i></span>
-              <input type="text" id="linkX" placeholder="X (Twitter) Profil Linkin" oninput="updateLivePreview()">
-            </div>
-            <div class="social-input-row">
-              <span class="social-prefix-icon youtube"><i class="fa-brands fa-youtube"></i></span>
-              <input type="text" id="linkYoutube" placeholder="YouTube Kanal Linkin" oninput="updateLivePreview()">
-            </div>
+        <!-- SEKME 5: DİNAMİK ÖZEL LİNKLER -->
+        <div class="editor-content-tab" id="tab-links">
+          <div class="links-header-action">
+            <label class="tab-label" style="margin-bottom:0;">Profil Bağlantıların:</label>
+            <button class="btn-add-custom-link" onclick="addCustomLinkItem()">
+              <i class="fa-solid fa-plus"></i> <span>Yeni Bağlantı Ekle</span>
+            </button>
+          </div>
+
+          <div class="custom-links-container" id="customLinksList">
+            <!-- Javascript ile dinamik eklenir -->
           </div>
         </div>
 
         <!-- Stüdyo Alt Kaydet & Link Al Butonları -->
         <div class="studio-bottom-actions">
           <button class="btn-clear-reset" onclick="resetStudioForm()">
-            <i class="fa-solid fa-rotate-left"></i> <span>Sıfırla</span>
+            <i class="fa-solid fa-rotate-left"></i> <span>Temizle</span>
           </button>
           <button class="btn-publish-glow" onclick="publishProfile()">
             <i class="fa-solid fa-paper-plane"></i>
-            <span>Profili Yayınla & Özel Linki Al</span>
+            <span>Profili Canlıya Al & Linkini Al</span>
           </button>
         </div>
 
       </div>
 
-      <!-- Sağ Panel: Canlı 3D Önizleme Sahnesi -->
+      <!-- Sağ Panel: Canlı 3D Kart Sahnesi -->
       <div class="studio-preview-pane">
         <div class="preview-badge-floating">
           <span class="live-dot"></span> CANLI ÖNİZLEME
@@ -361,9 +353,12 @@
         <div class="card-tilt-container" id="previewTiltContainer">
           <div class="only-card" id="previewOnlyCard">
             
+            <!-- Işık Parlama Katmanı (Glare Reflection) -->
+            <div class="card-glare" id="previewGlare"></div>
+
             <!-- Kart Üst Bar & Rozetler -->
             <div class="card-head-row">
-              <div class="card-uid-pill" id="cardUid">UID: #001</div>
+              <div class="card-uid-pill" id="cardUid">UID: #0NLY</div>
               <div class="card-badges-rack" id="cardBadges">
                 <!-- Canlı Rozetler -->
               </div>
@@ -371,36 +366,41 @@
 
             <!-- Avatar & Ring -->
             <div class="card-avatar-wrap">
-              <div class="avatar-ring ring-neon" id="cardAvatarRing"></div>
-              <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80" alt="Avatar" id="cardAvatarImg">
+              <div class="avatar-ring ring-pulsing-neon" id="cardAvatarRing"></div>
+              <div class="avatar-img-box" id="avatarImgBox">
+                <img src="" alt="Avatar" id="cardAvatarImg" style="display:none;">
+                <div class="avatar-placeholder-initials" id="avatarPlaceholder">
+                  <i class="fa-regular fa-user"></i>
+                </div>
+              </div>
               <span class="online-indicator online" id="cardStatusIndicator"></span>
             </div>
 
             <!-- İsim & Kimlik -->
             <div class="card-identity-box">
               <div class="card-name-line">
-                <h3 id="cardDisplayName">Jason</h3>
+                <h3 id="cardDisplayName">Kullanıcı Adı</h3>
                 <span class="verified-gem" id="cardVerified"><i class="fa-solid fa-circle-check"></i></span>
               </div>
               <div class="card-sub-line">
-                <span class="card-handle" id="cardHandleText">0nly.lol/jason</span>
-                <span class="sep">•</span>
-                <span class="card-pronouns" id="cardPronounsText">he/him</span>
-                <span class="sep">•</span>
-                <span class="card-location" id="cardLocationText"><i class="fa-solid fa-location-dot"></i> Miami</span>
+                <span class="card-handle" id="cardHandleText">0nly.lol/link</span>
+                <span class="sep" id="sepPronouns" style="display:none;">•</span>
+                <span class="card-pronouns" id="cardPronounsText" style="display:none;"></span>
+                <span class="sep" id="sepLocation" style="display:none;">•</span>
+                <span class="card-location" id="cardLocationText" style="display:none;"></span>
               </div>
             </div>
 
             <!-- Biyografi -->
-            <div class="card-bio-plate">
-              <p id="cardBioText">Sanalın en havalı köşesi. Profilinizi sıfırdan tasarlayın.</p>
+            <div class="card-bio-plate" id="cardBioPlate" style="display:none;">
+              <p id="cardBioText"></p>
             </div>
 
             <!-- Discord Aktivite Kartı -->
-            <div class="card-discord-box" id="cardDiscordBox">
+            <div class="card-discord-box" id="cardDiscordBox" style="display:none;">
               <div class="discord-head">
                 <i class="fa-brands fa-discord"></i>
-                <span>DISCORD CANLI AKTİVİTE</span>
+                <span>DISCORD AKTİVİTESİ</span>
                 <span class="discord-dot"></span>
               </div>
               <div class="discord-body">
@@ -408,14 +408,14 @@
                   <i class="fa-solid fa-gamepad"></i>
                 </div>
                 <div class="discord-info">
-                  <h5 id="cardDiscordTitle">Multi Theft Auto: San Andreas</h5>
-                  <p id="cardDiscordSub">Retro Roleplay (Miami 1986)</p>
-                  <span id="cardDiscordTime">02:40:15 geçen süre</span>
+                  <h5 id="cardDiscordTitle"></h5>
+                  <p id="cardDiscordSub"></p>
+                  <span id="cardDiscordTime"></span>
                 </div>
               </div>
             </div>
 
-            <!-- Sosyal Medya İkonları Grid -->
+            <!-- Sosyal Medya & Özel Linkler Grid -->
             <div class="card-socials-grid" id="cardSocialsGrid">
               <!-- Dinamik İkonlar -->
             </div>
@@ -449,7 +449,7 @@
           <i class="fa-solid fa-share-nodes"></i> <span>Profili Paylaş</span>
         </button>
         <button class="pub-btn highlight" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-plus"></i> <span>Kendi 0nly.lol Profilini Yarat</span>
+          <i class="fa-solid fa-plus"></i> <span>Sen de 0nly.lol Profilini Yarat</span>
         </button>
       </div>
 
