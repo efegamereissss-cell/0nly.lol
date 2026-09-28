@@ -3,442 +3,407 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>0NLY.LOL | Ultra-Elite Identity & Protected Bio Platform</title>
+  <title>KAPİTAL | Modern Para Kazanma, E-Ticaret & Yatırım Rehberi</title>
 
-  <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Ana Stil Dosyası -->
+  <!-- Stil Dosyası -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-void-nebula" id="appBody">
+<body class="light-mode">
 
-  <!-- ================= FARE İMLECİ IŞIK SPOTLIGHTI ================= -->
-  <div class="cursor-spotlight" id="cursorSpotlight"></div>
-
-  <!-- Arka Plan Dinamik Görsel Ambiyans -->
-  <div class="ambient-world">
-    <canvas id="ambientCanvas"></canvas>
-    <div class="cyber-vignette"></div>
-    <div class="scanlines-fx" id="scanlinesFx"></div>
-    <div class="grid-subtle"></div>
+  <!-- Üst Bilgi / Canlı Piyasa Şeridi (Ticker Bar) -->
+  <div class="market-ticker-bar">
+    <div class="ticker-content" id="tickerTrack">
+      <span class="ticker-item"><span class="ticker-name">S&P 500</span> <span class="ticker-val">5,782.40</span> <span class="ticker-up">+0.84%</span></span>
+      <span class="ticker-item"><span class="ticker-name">NASDAQ</span> <span class="ticker-val">18,190.10</span> <span class="ticker-up">+1.12%</span></span>
+      <span class="ticker-item"><span class="ticker-name">BIST 100</span> <span class="ticker-val">9,840.50</span> <span class="ticker-down">-0.24%</span></span>
+      <span class="ticker-item"><span class="ticker-name">USD / TRY</span> <span class="ticker-val">34.25</span> <span class="ticker-up">+0.08%</span></span>
+      <span class="ticker-item"><span class="ticker-name">ALTIN (ONS)</span> <span class="ticker-val">$2,654.10</span> <span class="ticker-up">+0.45%</span></span>
+      <span class="ticker-item"><span class="ticker-name">BITCOIN</span> <span class="ticker-val">$64,320.00</span> <span class="ticker-up">+2.40%</span></span>
+    </div>
   </div>
 
-  <!-- Üst VIP Navigasyon Barı -->
-  <header class="only-navbar">
+  <!-- Üst Minimalist Navigasyon Barı -->
+  <header class="clean-navbar">
     <div class="nav-container">
-      <div class="nav-brand" onclick="navigateTo('#/')">
-        <span class="brand-zero">0</span><span class="brand-text">NLY</span><span class="brand-dot">.</span><span class="brand-lol">LOL</span>
-        <span class="vip-crest"><i class="fa-solid fa-shield-halved"></i> SECURED</span>
-      </div>
+      <a href="#" class="brand-logo">
+        <div class="logo-mark"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <span class="logo-text">KAPİTAL<span class="dot">.</span></span>
+      </a>
 
-      <nav class="nav-menu">
-        <button class="nav-link" id="navHomeBtn" onclick="navigateTo('#/')">
-          <i class="fa-solid fa-compass"></i> <span>Ana Sayfa</span>
-        </button>
-        <button class="nav-link" id="navCreateBtn" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Profil Oluştur</span>
-          <span class="route-tag">/profilecreate</span>
-        </button>
-        <button class="nav-link" id="navMyProfileBtn" onclick="openMySavedProfile()">
-          <i class="fa-solid fa-user-astronaut"></i> <span>Profilim</span>
-        </button>
+      <nav class="nav-links">
+        <a href="#yatirim" class="nav-link">Borsa & Midas</a>
+        <a href="#eticaret" class="nav-link">E-Ticaret</a>
+        <a href="#freelance" class="nav-link">Dijital Gelir</a>
+        <a href="#hesaplayici" class="nav-link">Gelir Hesaplayıcı</a>
+        <a href="#yolharitasi" class="nav-link">Yol Haritası</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleSoundFx()" title="Arayüz Ses Efektleri">
-          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
-        </button>
-        <button class="btn-create-highlight" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-plus"></i>
-          <span>Kendi Alanını Rezerve Et</span>
-        </button>
+        <a href="#hesaplayici" class="btn-primary-clean">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Hesaplamaya Başla</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- ================= SAYFA ALANLARI (ROUTER VIEWS) ================= -->
-  
-  <!-- 1. GÖRÜNÜM: ANA SAYFA & EXPLORE (#/) -->
-  <section class="page-view" id="view-home">
-    <div class="home-hero-container">
-      <div class="hero-badge">
-        <span class="pulse-point"></span>
-        <span>KRİPTOGRAFİK OLARAK KİLİTLENEN KİMLİKLER</span>
+  <!-- ================= HERO BÖLÜMÜ (VİDEO ARKA PLANLI) ================= -->
+  <section class="video-hero-section">
+    <!-- Kullanıcının Belirttiği Özel MP4 Arka Plan Videosu -->
+    <video class="hero-video-bg" autoplay muted loop playsinline>
+      <source src="https://cdn.discordapp.com/attachments/1233881458104598613/1553791552680230993/summer.mp4?ex=6abb3166&is=6ab9dfe6&hm=de1f2bfa0e31059218cb25e4dc89fb790bf9a20a2c2f9e659d3686dd11542330&" type="video/mp4">
+    </video>
+
+    <!-- Beyaz Temalı Zarif Gradyan & Cam Katman -->
+    <div class="hero-white-overlay"></div>
+
+    <div class="hero-container">
+      <div class="hero-chip">
+        <span class="chip-dot"></span>
+        <span>2026 FİNANSAL ÖZGÜRLÜK & E-TİCARET REHBERİ</span>
       </div>
-      <h1 class="hero-title">
-        KULLANICI ADINI <br>
-        <span class="gradient-text">EBEDİYEN REZERVE ET</span>
+
+      <h1 class="hero-main-title">
+        Paranı Çalıştır.<br>
+        <span class="gradient-text">Gelirini Dijitalde Katla.</span>
       </h1>
-      <p class="hero-subtitle">
-        Alınan bir 0nly.lol linki ve kullanıcı adı veritabanında SHA-256 şifrenle kilitlenir. Başka hiç kimse senin adını çalamaz veya üzerine yazamaz.
+
+      <p class="hero-subtext">
+        Midas ile Amerikan ve Türk borsalarında akıllı hisse senedi yatırımı yapmaktan, Shopify ve Amazon ile e-ticaret imparatorluğu kurmaya kadar en kanıtlanmış modern gelir modelleri.
       </p>
 
-      <div class="hero-cta-group">
-        <button class="btn-primary-glow" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-lock"></i>
-          <span>Kullanıcı Adını Koru & Profil Oluştur (/profilecreate)</span>
-        </button>
+      <div class="hero-buttons-row">
+        <a href="#yatirim" class="btn-hero-solid">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Midas & Yatırım Rehberi</span>
+        </a>
+        <a href="#eticaret" class="btn-hero-outline">
+          <i class="fa-solid fa-store"></i>
+          <span>E-Ticaret Modelleri</span>
+        </a>
       </div>
 
-      <!-- Öne Çıkanlar & İstatistikler -->
-      <div class="hero-stats-bar">
-        <div class="stat-box">
-          <span class="stat-number"><i class="fa-solid fa-lock text-accent"></i> SHA-256</span>
-          <span class="stat-desc">Kırılamaz Güvenlik</span>
+      <!-- Hero Altı Özet Metrikler -->
+      <div class="hero-metric-bar">
+        <div class="metric-card">
+          <span class="metric-num">%15 - %25</span>
+          <span class="metric-lbl">Yıllık Ortalama Borsa Büyümesi</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-box">
-          <span class="stat-number">Kalıcı</span>
-          <span class="stat-desc">Asla Başkası Alamaz</span>
+        <div class="metric-sep"></div>
+        <div class="metric-card">
+          <span class="metric-num">$1,000+</span>
+          <span class="metric-lbl">Aylık E-Ticaret Net Kar Potansiyeli</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-box">
-          <span class="stat-number">Dosya Gezgini</span>
-          <span class="stat-desc">Doğrudan PC'den Yükle</span>
+        <div class="metric-sep"></div>
+        <div class="metric-card">
+          <span class="metric-num">0 Komisyon</span>
+          <span class="metric-lbl">Midas ile Kolay Hisse Alımı</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. GÖRÜNÜM: PROFİL OLUŞTURUCU SUITE (#/profilecreate) -->
-  <section class="page-view" id="view-profilecreate">
-    <div class="studio-container">
-      
-      <!-- Sol Panel: Form & Seçenekler -->
-      <div class="studio-editor-pane">
+  <!-- ================= BÖLÜM 1: BORSA & MİDAS REHBERİ ================= -->
+  <section class="content-section" id="yatirim">
+    <div class="section-container">
+      <div class="section-badge">YATIRIM & BİRİKİM</div>
+      <h2 class="section-heading">Midas ile Borsada Akıllı Büyüme</h2>
+      <p class="section-description">
+        Midas, Türkiye'de oturduğun yerden Apple, Tesla, Microsoft gibi dev Amerikan şirketlerine ve Borsa İstanbul'a (BIST) tek tuşla, düşük komisyonla ortak olmanı sağlayan en popüler finans uygulamasıdır.
+      </p>
+
+      <div class="features-trio-grid">
         
-        <div class="studio-header">
-          <div class="studio-badge-row">
-            <span class="studio-tag"><i class="fa-solid fa-shield-halved"></i> GÜVENLİ MİMAR</span>
-            <span class="url-preview-pill">0nly.lol/<strong id="liveUrlPreview">...</strong></span>
+        <div class="white-card guide-card">
+          <div class="card-icon-box green">
+            <i class="fa-solid fa-building-columns"></i>
           </div>
-          <h2>Kişisel Profil & İsim Rezervasyonu</h2>
-          <p>Kullanıcı adını şifrenle kilitle. Belirlediğin şifre olmadan dünyada hiç kimse adını değiştiremez.</p>
+          <h3>1. S&P 500 ve Dünya Devlerine Ortak Ol</h3>
+          <p>
+            Tüm paranı tek bir şirkete bağlamak yerine, Amerikan ekonomisinin en büyük 500 şirketini kapsayan **VOO** veya teknoloji devi **QQQ** gibi fonlara Midas ile aylık düzenli yatırım yaparak dolar bazında bileşik büyüme sağla.
+          </p>
+          <ul class="card-feature-list">
+            <li><i class="fa-solid fa-check text-green"></i> 1 Dolarla bile hisse parçası alabilme</li>
+            <li><i class="fa-solid fa-check text-green"></i> SPK ve SEC lisanslı güvence</li>
+            <li><i class="fa-solid fa-check text-green"></i> Dolar bazlı enflasyon koruması</li>
+          </ul>
         </div>
 
-        <!-- Akordeon / Sekmeli Düzenleyici (Discord kaldırıldı) -->
-        <div class="editor-tabs-bar">
-          <button class="editor-tab-btn active" onclick="switchEditorTab('tab-identity')">
-            <i class="fa-regular fa-id-badge"></i> <span>Kimlik & Güvenlik</span>
-          </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-photo')">
-            <i class="fa-solid fa-camera"></i> <span>Profil Fotoğrafı</span>
-          </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-appearance')">
-            <i class="fa-solid fa-palette"></i> <span>Tema & Çerçeve</span>
-          </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-badges')">
-            <i class="fa-solid fa-award"></i> <span>Rozetler</span>
-          </button>
-          <button class="editor-tab-btn" onclick="switchEditorTab('tab-links')">
-            <i class="fa-solid fa-link"></i> <span>Özel Linkler</span>
-          </button>
+        <div class="white-card guide-card">
+          <div class="card-icon-box blue">
+            <i class="fa-solid fa-sack-dollar"></i>
+          </div>
+          <h3>2. Temettü (Dividend) Emekliliği</h3>
+          <p>
+            Coca-Cola, Realty Income, Johnson & Johnson veya BIST'in köklü temettü devlerinden düzenli kar payı topla. Şirketler para kazandıkça hesabına her ay veya 3 ayda bir otomatik nakit yatsın.
+          </p>
+          <ul class="card-feature-list">
+            <li><i class="fa-solid fa-check text-green"></i> Çalışmadan düzenli pasif nakit akışı</li>
+            <li><i class="fa-solid fa-check text-green"></i> Temettüyü tekrar yatırarak katlama</li>
+            <li><i class="fa-solid fa-check text-green"></i> Erken finansal özgürlük stratejisi</li>
+          </ul>
         </div>
 
-        <!-- SEKME 1: KİMLİK & ŞİFRE GÜVENLİĞİ -->
-        <div class="editor-content-tab active" id="tab-identity">
-          <div class="form-grid">
-            <div class="input-block">
-              <label><i class="fa-solid fa-link"></i> Almak İstediğin Link (Handle):</label>
-              <div class="prefix-input">
-                <span class="input-prefix">0nly.lol/</span>
-                <input type="text" id="inputHandle" placeholder="kullanici_adin" oninput="updateLivePreview()" maxlength="24">
-              </div>
-              <small>0nly.lol/ üzerinden kalıcı olarak adına rezerve edilecek isim.</small>
-            </div>
-
-            <div class="input-block">
-              <label><i class="fa-solid fa-key"></i> Gizli Profil Şifren (İsmini Kilitlemek İçin):</label>
-              <input type="password" id="inputPassword" placeholder="Şifren (Profilini korur, kimse çalamaz)" required>
-              <small>Bu isim bir kez kaydedilince sadece bu şifreyle düzenlenebilir!</small>
-            </div>
-
-            <div class="input-block">
-              <label>Görünen Adın (Display Name):</label>
-              <input type="text" id="inputDisplayName" placeholder="Profilinde görünecek ismin..." oninput="updateLivePreview()">
-            </div>
-
-            <div class="input-block">
-              <label>Ünvan / Zamirler (İsteğe Bağlı):</label>
-              <input type="text" id="inputPronouns" placeholder="Örn: Sanalcı, Developer, he/him..." oninput="updateLivePreview()">
-            </div>
+        <div class="white-card guide-card">
+          <div class="card-icon-box purple">
+            <i class="fa-solid fa-piggy-bank"></i>
           </div>
-
-          <div class="input-block full-width">
-            <label>Konum / Şehir (İsteğe Bağlı):</label>
-            <input type="text" id="inputLocation" placeholder="Örn: Miami, Tokyo, Cyberspace..." oninput="updateLivePreview()">
-          </div>
-
-          <!-- Biyografi -->
-          <div class="input-block full-width">
-            <label>Biyografi & Durum Açıklaması:</label>
-            <textarea id="inputBio" rows="3" placeholder="Profilinde sergilemek istediğin açıklama, söz ya da felsefen..." oninput="updateLivePreview()"></textarea>
-          </div>
-        </div>
-
-        <!-- SEKME 2: FOTOĞRAF (SADECE DOSYA GEZGİNİ) -->
-        <div class="editor-content-tab" id="tab-photo">
-          <div class="file-explorer-dropzone" onclick="triggerFilePicker()">
-            <input type="file" id="avatarFileInput" accept="image/*" onchange="handleAvatarFileSelect(event)" style="display:none;">
-            <div class="dropzone-icon">
-              <i class="fa-solid fa-folder-open text-accent"></i>
-            </div>
-            <h4>Bilgisayardan Fotoğraf Seç</h4>
-            <p>Tıklayarak doğrudan Windows Dosya Gezgini'ni aç ve istediğin resmi seç.</p>
-            <span class="btn-browse-file"><i class="fa-solid fa-desktop"></i> Dosya Gezginini Aç</span>
-          </div>
-
-          <!-- Seçilen Fotoğraf Önizleme & Kaldırma -->
-          <div class="selected-photo-bar" id="selectedPhotoBar" style="display:none;">
-            <img src="" alt="Thumbnail" id="selectedThumb">
-            <div class="photo-meta">
-              <span class="photo-name" id="selectedPhotoName">fotoğraf.png</span>
-              <span class="photo-size" id="selectedPhotoSize">Dosya yüklendi</span>
-            </div>
-            <button class="btn-remove-photo" onclick="removeSelectedAvatar()" title="Fotoğrafı Kaldır">
-              <i class="fa-solid fa-trash"></i> Kaldır
-            </button>
-          </div>
-        </div>
-
-        <!-- SEKME 3: GÖRÜNÜM, TEMA & ÇERÇEVELER -->
-        <div class="editor-content-tab" id="tab-appearance">
-          <label class="tab-label">Havalı VIP Renk Temaları:</label>
-          <div class="theme-cards-grid">
-            <div class="theme-card active" data-theme="theme-void-nebula" onclick="pickTheme('theme-void-nebula')">
-              <div class="theme-preview-color color-void"></div>
-              <span class="theme-name">Void Nebula</span>
-            </div>
-            <div class="theme-card" data-theme="theme-tokyo-red" onclick="pickTheme('theme-tokyo-red')">
-              <div class="theme-preview-color color-tokyo"></div>
-              <span class="theme-name">Tokyo Cyber Red</span>
-            </div>
-            <div class="theme-card" data-theme="theme-phantom-emerald" onclick="pickTheme('theme-phantom-emerald')">
-              <div class="theme-preview-color color-emerald"></div>
-              <span class="theme-name">Phantom Emerald</span>
-            </div>
-            <div class="theme-card" data-theme="theme-liquid-chrome" onclick="pickTheme('theme-liquid-chrome')">
-              <div class="theme-preview-color color-chrome"></div>
-              <span class="theme-name">Liquid Chrome</span>
-            </div>
-            <div class="theme-card" data-theme="theme-midnight-amethyst" onclick="pickTheme('theme-midnight-amethyst')">
-              <div class="theme-preview-color color-amethyst"></div>
-              <span class="theme-name">Midnight Amethyst</span>
-            </div>
-            <div class="theme-card" data-theme="theme-solar-eclipse" onclick="pickTheme('theme-solar-eclipse')">
-              <div class="theme-preview-color color-solar"></div>
-              <span class="theme-name">Solar Gold</span>
-            </div>
-            <div class="theme-card" data-theme="theme-abyssal-ocean" onclick="pickTheme('theme-abyssal-ocean')">
-              <div class="theme-preview-color color-abyss"></div>
-              <span class="theme-name">Abyssal Cyan</span>
-            </div>
-          </div>
-
-          <label class="tab-label" style="margin-top: 18px;">Avatar Çerçeve Stili:</label>
-          <div class="ring-selector-row">
-            <button class="ring-choice-btn active" data-ring="ring-pulsing-neon" onclick="pickRingStyle('ring-pulsing-neon')">Pulsing Neon</button>
-            <button class="ring-choice-btn" data-ring="ring-gold-crown" onclick="pickRingStyle('ring-gold-crown')">Golden Luxury</button>
-            <button class="ring-choice-btn" data-ring="ring-cyber-glitch" onclick="pickRingStyle('ring-cyber-glitch')">Cyber Glitch</button>
-            <button class="ring-choice-btn" data-ring="ring-pure-glass" onclick="pickRingStyle('ring-pure-glass')">Pure Glass</button>
-            <button class="ring-choice-btn" data-ring="ring-stealth" onclick="pickRingStyle('ring-stealth')">None (Sade)</button>
-          </div>
-
-          <div class="toggle-control-box" style="margin-top: 20px;">
-            <label class="switch-toggle">
-              <input type="checkbox" id="checkVerifiedBadge" checked onchange="updateLivePreview()">
-              <span class="slider"></span>
-              <span class="toggle-text">Doğrulanmış Rozeti (Verified Checkmark)</span>
-            </label>
-            <label class="switch-toggle">
-              <input type="checkbox" id="check3dTilt" checked>
-              <span class="slider"></span>
-              <span class="toggle-text">3D Fare Eğim Fiziği & Işık Parlaması (3D Glare)</span>
-            </label>
-            <label class="switch-toggle">
-              <input type="checkbox" id="checkScanlines" checked onchange="toggleScanlinesFx()">
-              <span class="slider"></span>
-              <span class="toggle-text">CRT Retro Çizgi & Monitör Ambiyansı</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- SEKME 4: ROZETLER & PRESTİJ -->
-        <div class="editor-content-tab" id="tab-badges">
-          <label class="tab-label">Profilinde Sergilemek İstediğin Rozetleri Seç:</label>
-          <div class="badges-selection-grid">
-            <label class="badge-checkbox">
-              <input type="checkbox" value="sanalci" checked onchange="updateLivePreview()">
-              <div class="badge-item-view sanalci"><i class="fa-solid fa-skull"></i> <span>Sanalcı Elite</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="vip" checked onchange="updateLivePreview()">
-              <div class="badge-item-view vip"><i class="fa-solid fa-gem"></i> <span>VIP Donator</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="og" onchange="updateLivePreview()">
-              <div class="badge-item-view og"><i class="fa-solid fa-crown"></i> <span>OG Member</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="verified" checked onchange="updateLivePreview()">
-              <div class="badge-item-view verified"><i class="fa-solid fa-shield-halved"></i> <span>Verified</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="dev" onchange="updateLivePreview()">
-              <div class="badge-item-view dev"><i class="fa-solid fa-code"></i> <span>Developer</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="staff" onchange="updateLivePreview()">
-              <div class="badge-item-view staff"><i class="fa-solid fa-bolt"></i> <span>Staff / Lider</span></div>
-            </label>
-            <label class="badge-checkbox">
-              <input type="checkbox" value="booster" onchange="updateLivePreview()">
-              <div class="badge-item-view booster"><i class="fa-solid fa-rocket"></i> <span>Server Booster</span></div>
-            </label>
-          </div>
-        </div>
-
-        <!-- SEKME 5: DİNAMİK ÖZEL LİNKLER -->
-        <div class="editor-content-tab" id="tab-links">
-          <div class="links-header-action">
-            <label class="tab-label" style="margin-bottom:0;">Profil Bağlantıların:</label>
-            <button class="btn-add-custom-link" onclick="addCustomLinkItem()">
-              <i class="fa-solid fa-plus"></i> <span>Yeni Bağlantı Ekle</span>
-            </button>
-          </div>
-
-          <div class="custom-links-container" id="customLinksList">
-            <!-- Javascript ile dinamik eklenir -->
-          </div>
-        </div>
-
-        <!-- Stüdyo Alt Kaydet & Link Al Butonları -->
-        <div class="studio-bottom-actions">
-          <button class="btn-clear-reset" onclick="resetStudioForm()">
-            <i class="fa-solid fa-rotate-left"></i> <span>Temizle</span>
-          </button>
-          <button class="btn-publish-glow" onclick="publishProfile()">
-            <i class="fa-solid fa-lock"></i>
-            <span>Kullanıcı Adını Kilitle & Yayına Al</span>
-          </button>
+          <h3>3. Dolar Maliyeti Ortalaması (DCA)</h3>
+          <p>
+            Piyasanın ne zaman düşüp çıkacağını tahmin etmeye çalışma. Her ay maaşından veya kazancından ayırdığın sabit bir miktarla (örneğin 2.000 TL) günü gününe alım yap. Fiyat düşünce daha çok pay alır, yükselince kazanırsın.
+          </p>
+          <ul class="card-feature-list">
+            <li><i class="fa-solid fa-check text-green"></i> Stresten uzak, sistemli yatırım</li>
+            <li><i class="fa-solid fa-check text-green"></i> 5-10 yıllık vadede kanıtlanmış getiri</li>
+            <li><i class="fa-solid fa-check text-green"></i> Midas üzerinden otomatik emir kurma</li>
+          </ul>
         </div>
 
       </div>
 
-      <!-- Sağ Panel: Canlı 3D Kart Sahnesi -->
-      <div class="studio-preview-pane">
-        <div class="preview-badge-floating">
-          <span class="live-dot"></span> CANLI ÖNİZLEME
+      <!-- Midas Öneri Kutusu -->
+      <div class="midas-recommend-banner">
+        <div class="midas-logo-side">
+          <div class="app-icon-midas"><i class="fa-solid fa-bolt"></i></div>
+          <div>
+            <h4>Midas Uygulaması ile Başla</h4>
+            <p>Hızlı kayıt, hesap işletim ücreti yok, BIST ve ABD borsaları tek hesapta.</p>
+          </div>
+        </div>
+        <a href="https://www.getmidas.com" target="_blank" class="btn-midas-action">
+          <span>Midas'ı İncele</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BÖLÜM 2: E-TİCARET İLE PARA KAZANMA ================= -->
+  <section class="content-section bg-soft" id="eticaret">
+    <div class="section-container">
+      <div class="section-badge">TİCARET & GLOBAL SATIŞ</div>
+      <h2 class="section-heading">2026'da E-Ticaret ile Dolar ve Euro Kazanmak</h2>
+      <p class="section-description">
+        Fiziksel ya da dijital ürün satışı, sıfırdan en hızlı sermaye oluşturan dijital iş modelidir. İşte bugün başlayabileceğin en karlı modeller:
+      </p>
+
+      <div class="ecommerce-models-grid">
+        
+        <div class="white-card ecom-card">
+          <div class="ecom-badge">YÜKSEK TALEP</div>
+          <div class="ecom-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <h3>Shopify & Marka Kurma</h3>
+          <p>Kendi alan adınla modern bir web mağazası aç. Belirli bir nişe odaklanarak (örneğin deri cüzdanlar, kahve ekipmanları veya evcil hayvan ürünleri) sosyal medya reklamlarıyla doğrudan müşteriye sat.</p>
+          <div class="ecom-meta-row">
+            <span>Sermaye: <strong>Düşük - Orta</strong></span>
+            <span>Potansiyel: <strong>Sınırsız Ölçek</strong></span>
+          </div>
         </div>
 
-        <!-- 3D Kart Konteyneri -->
-        <div class="card-tilt-container" id="previewTiltContainer">
-          <div class="only-card" id="previewOnlyCard">
+        <div class="white-card ecom-card">
+          <div class="ecom-badge">GLOBAL</div>
+          <div class="ecom-icon"><i class="fa-brands fa-amazon"></i></div>
+          <h3>Amazon FBA & Depolama</h3>
+          <p>Ürünlerini toplu olarak üret veya toptancıdan al, doğrudan Amazon'un ABD/Avrupa depolarına gönder. Müşteri satın aldığında kargolamayı ve müşteri hizmetlerini Amazon halletsin.</p>
+          <div class="ecom-meta-row">
+            <span>Sermaye: <strong>Orta - Yüksek</strong></span>
+            <span>Müşteri: <strong>300+ Milyon Hazır Alıcı</strong></span>
+          </div>
+        </div>
+
+        <div class="white-card ecom-card">
+          <div class="ecom-badge">0 MALİYET</div>
+          <div class="ecom-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <h3>Dijital Ürün Satışı (Gumroad / Etsy)</h3>
+          <p>Kargo yok, stok yok, üretim maliyeti sıfır! Notion şablonları, bütçe tabloları, Lightroom hazır ayarları veya e-kitaplar üretip sınırsız kez satarak %95 kar marjı elde et.</p>
+          <div class="ecom-meta-row">
+            <span>Sermaye: <strong>Sıfır TL</strong></span>
+            <span>Kar Marjı: <strong>%95 Net Kar</strong></span>
+          </div>
+        </div>
+
+        <div class="white-card ecom-card">
+          <div class="ecom-badge">YURTİÇİ</div>
+          <div class="ecom-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <h3>Trendyol & Hepsiburada Pazaryerleri</h3>
+          <p>Türkiye'nin dev pazaryerlerinde yerel üreticilerden veya toptancılardan aldığın popüler ürünleri hızlı kargo avantajıyla milyonlarca Türk müşteriye ulaştır.</p>
+          <div class="ecom-meta-row">
+            <span>Sermaye: <strong>Düşük</strong></span>
+            <span>Başlangıç: <strong>1 Günde Açılış</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BÖLÜM 3: İNTERAKTİF BİLEŞİK GETİRİ HESAPLAYICI ================= -->
+  <section class="content-section" id="hesaplayici">
+    <div class="section-container">
+      <div class="calc-wrapper white-card">
+        <div class="calc-header">
+          <div class="section-badge">FİNANSAL SİMÜLATÖR</div>
+          <h2>Bileşik Getiri ile Paranın Geleceğini Hesapla</h2>
+          <p>Düzenli biriktirip Midas gibi platformlarda hisse ve fonlara yatırırsan yıllar içinde servetin nasıl katlanır? Kaydırarak gör.</p>
+        </div>
+
+        <div class="calc-grid">
+          
+          <!-- Sol Kontroller -->
+          <div class="calc-controls">
             
-            <!-- Işık Parlama Katmanı (Glare Reflection) -->
-            <div class="card-glare" id="previewGlare"></div>
-
-            <!-- Kart Üst Bar & Rozetler -->
-            <div class="card-head-row">
-              <div class="card-uid-pill" id="cardUid">
-                <i class="fa-solid fa-lock text-accent"></i> <span>PROTECTED</span>
+            <div class="range-group">
+              <div class="range-label-row">
+                <span>Başlangıç Sermayesi:</span>
+                <span class="range-val" id="valInitial">₺10.000</span>
               </div>
-              <div class="card-badges-rack" id="cardBadges">
-                <!-- Canlı Rozetler -->
+              <input type="range" id="inputInitial" min="0" max="250000" step="5000" value="10000" oninput="calculateWealth()">
+            </div>
+
+            <div class="range-group">
+              <div class="range-label-row">
+                <span>Aylık Düzenli Yatırım:</span>
+                <span class="range-val" id="valMonthly">₺5.000</span>
+              </div>
+              <input type="range" id="inputMonthly" min="500" max="50000" step="500" value="5000" oninput="calculateWealth()">
+            </div>
+
+            <div class="range-group">
+              <div class="range-label-row">
+                <span>Beklenen Yıllık Büyüme:</span>
+                <span class="range-val" id="valRate">%20</span>
+              </div>
+              <input type="range" id="inputRate" min="5" max="40" step="1" value="20" oninput="calculateWealth()">
+              <small class="hint-text">S&P 500 ve kaliteli hisse fonlarının uzun vadeli ortalaması.</small>
+            </div>
+
+            <div class="range-group">
+              <div class="range-label-row">
+                <span>Yatırım Süresi:</span>
+                <span class="range-val" id="valYears">10 Yıl</span>
+              </div>
+              <input type="range" id="inputYears" min="1" max="30" step="1" value="10" oninput="calculateWealth()">
+            </div>
+
+          </div>
+
+          <!-- Sağ Sonuç Kartı -->
+          <div class="calc-result-box">
+            <span class="result-small-title">Tahmini Toplam Portföy Değeri</span>
+            <div class="result-big-number" id="resultTotalWealth">₺1.842.150</div>
+            
+            <div class="result-breakdown">
+              <div class="breakdown-item">
+                <span class="lbl">Cebinden Çıkan Toplam Para:</span>
+                <strong id="resultTotalInvested">₺610.000</strong>
+              </div>
+              <div class="breakdown-item highlight">
+                <span class="lbl">Kazanılan Bileşik Faiz & Kar:</span>
+                <strong id="resultTotalInterest">₺1.232.150</strong>
               </div>
             </div>
 
-            <!-- Avatar & Ring -->
-            <div class="card-avatar-wrap">
-              <div class="avatar-ring ring-pulsing-neon" id="cardAvatarRing"></div>
-              <div class="avatar-img-box" id="avatarImgBox">
-                <img src="" alt="Avatar" id="cardAvatarImg" style="display:none;">
-                <div class="avatar-placeholder-initials" id="avatarPlaceholder">
-                  <i class="fa-regular fa-user"></i>
-                </div>
-              </div>
+            <div class="calc-advice-box">
+              <i class="fa-solid fa-lightbulb"></i>
+              <p>Bileşik getiri sayesinde kazandığın kar, yatırdığın ana paranın <strong>2 katını</strong> aşıyor. Zaman senin en büyük dostun!</p>
             </div>
+          </div>
 
-            <!-- İsim & Kimlik -->
-            <div class="card-identity-box">
-              <div class="card-name-line">
-                <h3 id="cardDisplayName">Kullanıcı Adı</h3>
-                <span class="verified-gem" id="cardVerified"><i class="fa-solid fa-circle-check"></i></span>
-              </div>
-              <div class="card-sub-line">
-                <span class="card-handle" id="cardHandleText">0nly.lol/link</span>
-                <span class="sep" id="sepPronouns" style="display:none;">•</span>
-                <span class="card-pronouns" id="cardPronounsText" style="display:none;"></span>
-                <span class="sep" id="sepLocation" style="display:none;">•</span>
-                <span class="card-location" id="cardLocationText" style="display:none;"></span>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Biyografi -->
-            <div class="card-bio-plate" id="cardBioPlate" style="display:none;">
-              <p id="cardBioText"></p>
-            </div>
+  <!-- ================= BÖLÜM 4: ADIM ADIM YOL HARİTASI ================= -->
+  <section class="content-section bg-soft" id="yolharitasi">
+    <div class="section-container">
+      <div class="section-badge">STRATEJİ</div>
+      <h2 class="section-heading">Sıfırdan Başlayanlar İçin Yol Haritası</h2>
+      <p class="section-description">Karmaşık teorileri unut. Bugün başlayıp adım adım finansal gücünü büyütebileceğin 4 adımlı net plan:</p>
 
-            <!-- Sosyal Medya & Özel Linkler Grid -->
-            <div class="card-socials-grid" id="cardSocialsGrid">
-              <!-- Dinamik İkonlar -->
-            </div>
+      <div class="roadmap-timeline">
+        
+        <div class="roadmap-step">
+          <div class="step-marker">01</div>
+          <div class="step-content white-card">
+            <h4>Acil Durum Fonu & Borçları Kapat</h4>
+            <p>Yatırıma başlamadan önce en az 3 aylık temel giderini likit bir vadeli hesapta tut. Yüksek faizli tüketici kredilerini kapat.</p>
+          </div>
+        </div>
 
-            <!-- Kart Alt Bilgi (Footer) -->
-            <div class="card-footer-branding">
-              <i class="fa-solid fa-shield-halved text-accent"></i> <span>0nly.lol Korumalı Profil</span>
-            </div>
+        <div class="roadmap-step">
+          <div class="step-marker">02</div>
+          <div class="step-content white-card">
+            <h4>Midas Hesabı Aç & Düzenli Alıma Başla</h4>
+            <p>Her ay kazancının en az %15'ini Midas üzerinden S&P 500 fonlarına veya temettü hisselerine ayır. Piyasayı tahmin etmeden disiplinle biriktir.</p>
+          </div>
+        </div>
 
+        <div class="roadmap-step">
+          <div class="step-marker">03</div>
+          <div class="step-content white-card">
+            <h4>İkinci Bir Dijital Gelir Kaynağı Kur (E-Ticaret)</h4>
+            <p>Maaşınla yetinme. Akşamları ve hafta sonları Shopify mağazası, dijital ürünler veya freelance hizmetlerle dolar kazanmaya başla.</p>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="step-marker">04</div>
+          <div class="step-content white-card">
+            <h4>Karını Tekrar Portföyüne Aktar (Kartopu Etkisi)</h4>
+            <p>E-ticaretten kazandığın ek geliri lükse değil, borsadaki portföyüne aktar. Gelir getiren varlıkların senin için çalışmaya başlasın.</p>
           </div>
         </div>
 
       </div>
-
     </div>
   </section>
 
-  <!-- 3. GÖRÜNÜM: TEKİL HALKA AÇIK PROFİL GÖRÜNÜMÜ (#/{username}) -->
-  <section class="page-view" id="view-public-profile">
-    <div class="public-profile-stage">
-      
-      <!-- Halka Açık Kart Alanı -->
-      <div class="card-tilt-container" id="publicTiltContainer">
-        <!-- Javascript ile doldurulur -->
-        <div id="publicCardMount"></div>
+  <!-- ================= FOOTER ================= -->
+  <footer class="clean-footer">
+    <div class="footer-container">
+      <div class="footer-brand-side">
+        <a href="#" class="brand-logo">
+          <div class="logo-mark"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <span class="logo-text">KAPİTAL<span class="dot">.</span></span>
+        </a>
+        <p class="footer-tagline">Finansal okuryazarlık, modern e-ticaret modelleri ve akıllı yatırım stratejileri.</p>
       </div>
 
-      <!-- Alt Hızlı Eylem Çubuğu -->
-      <div class="public-action-bar">
-        <button class="pub-btn" onclick="copyCurrentProfileUrl()">
-          <i class="fa-solid fa-share-nodes"></i> <span>Profili Paylaş</span>
-        </button>
-        <button class="pub-btn" onclick="openEditPromptForCurrentProfile()">
-          <i class="fa-solid fa-pen-to-square"></i> <span>Profili Düzenle (Şifre ile)</span>
-        </button>
-        <button class="pub-btn highlight" onclick="navigateTo('#/profilecreate')">
-          <i class="fa-solid fa-plus"></i> <span>Kendi Adını Kilitle</span>
-        </button>
+      <div class="footer-links-group">
+        <div class="f-col">
+          <h5>Yatırım</h5>
+          <a href="#yatirim">Midas Rehberi</a>
+          <a href="#yatirim">S&P 500 Fonları</a>
+          <a href="#yatirim">Temettü Geliri</a>
+        </div>
+        <div class="f-col">
+          <h5>E-Ticaret</h5>
+          <a href="#eticaret">Shopify Mağazası</a>
+          <a href="#eticaret">Amazon FBA</a>
+          <a href="#eticaret">Dijital Ürünler</a>
+        </div>
+        <div class="f-col">
+          <h5>Araçlar</h5>
+          <a href="#hesaplayici">Getiri Hesaplayıcı</a>
+          <a href="#yolharitasi">Yol Haritası</a>
+        </div>
       </div>
-
     </div>
-  </section>
-
-  <!-- VIP Apple/Guns Toast Bildirimi -->
-  <div class="only-toast" id="onlyToast">
-    <div class="toast-marker"></div>
-    <div class="toast-text-group">
-      <h4 id="toastTitle">0NLY.LOL</h4>
-      <p id="toastMessage">İşlem başarıyla tamamlandı.</p>
+    <div class="footer-bottom">
+      <p>© 2026 KAPİTAL. Tüm hakları saklıdır. Bu sitedeki içerikler eğitim amaçlıdır, yatırım tavsiyesi değildir.</p>
     </div>
-  </div>
+  </footer>
 
-  <!-- Ana Script Dosyası -->
+  <!-- Script Dosyası -->
   <script src="app.js"></script>
 </body>
 </html>
